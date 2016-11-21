@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar" android:id="@+id/main_title_bar"/>
+
+
+
+    <com.zhoumai.qingtao.view.NoscrollViewPager
+        android:id="@+id/vp_content_pagers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/rg_content_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_red_normal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_content_home"
+            style="@style/bottomStyle"
+            android:drawableTop="@drawable/button_red_normal"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/rb_content_classify"
+            style="@style/bottomStyle"
+            android:drawableTop="@drawable/guide_btn_selector"
+            android:text="分类" />
+
+        <RadioButton
+            android:id="@+id/rb_content_purchase"
+            style="@style/bottomStyle"
+            android:drawableTop="@drawable/button_red_normal"
+            android:text="订单" />
+
+        <RadioButton
+            android:id="@+id/rb_content_me"
+            style="@style/bottomStyle"
+            android:drawableTop="@drawable/button_red_normal"
+            android:text="我的" />
+
+    </RadioGroup>
+
+</LinearLayout>
