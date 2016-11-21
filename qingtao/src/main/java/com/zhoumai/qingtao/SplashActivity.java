@@ -8,7 +8,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
-import com.zhoumai.qingtao.utils.MyApp;
+import com.zhoumai.qingtao.base.baseapplication.MyApp;
 import com.zhoumai.qingtao.utils.SpUtils;
 
 import butterknife.BindView;

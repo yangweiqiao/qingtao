@@ -3,7 +3,7 @@
     package="com.zhoumai.qingtao">
 
     <application
-        android:name=".utils.MyApp"
+        android:name=".base.baseapplication.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

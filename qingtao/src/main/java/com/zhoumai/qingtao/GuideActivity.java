@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 
 import com.zhoumai.qingtao.utils.ActivityFinishUtils;
 import com.zhoumai.qingtao.utils.DensityUtil;
-import com.zhoumai.qingtao.utils.MyApp;
+import com.zhoumai.qingtao.base.baseapplication.MyApp;
 import com.zhoumai.qingtao.utils.SpUtils;
 
 import java.util.ArrayList;

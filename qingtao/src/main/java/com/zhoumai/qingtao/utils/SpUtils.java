@@ -1,6 +1,8 @@
 package com.zhoumai.qingtao.utils;
 import android.content.Context;
-import android.content.SharedPreferences;
+
+import com.zhoumai.qingtao.base.baseapplication.MyApp;
+
 public class SpUtils {
 	private static final String NAME = "config";
 	/**

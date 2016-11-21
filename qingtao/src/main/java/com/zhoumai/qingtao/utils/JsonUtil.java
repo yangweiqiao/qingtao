@@ -1,14 +1,17 @@
 package com.zhoumai.qingtao.utils;
 
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
-import android.text.TextUtils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 /**
  * 基于Gson进行解析
  * @author Administrator
@@ -40,6 +43,7 @@ public class JsonUtil {
 		try {
 			t = gson.fromJson(json, cls);
 		} catch (Exception e) {
+			Logger.i("JsonUtil", "解析json数据时出现异常\njson = " + json );
 		}
 		return t;
 	}
@@ -56,6 +60,7 @@ public class JsonUtil {
 		try {
 			map = gson.fromJson(json, type);
 		} catch (Exception e) {
+			Logger.i("JsonUtil", "解析json数据时出现异常\njson = " + json );
 		}
 		return map;
 	}
