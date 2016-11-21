@@ -70,13 +70,13 @@ public class MainActivity extends FragmentActivity {
     }
 
 
-
     private void initDatas() {
 
         MyViewPageAdapter adapter = new MyViewPageAdapter(null);
         vpContentPagers.setAdapter(adapter);
 
     }
+
     private void init() {
 //默认显示首页
         vpContentPagers.setCurrentItem(0);
