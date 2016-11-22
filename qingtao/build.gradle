@@ -10,6 +10,40 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu",
+                                UMENG_APPKEY_VALUE : "5833e576677baa1c18000993",]
+        productFlavors {
+
+
+            wandoujia {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
+            }
+
+            baidu {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
+            }
+
+            c360 {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "c360"]
+            }
+
+            xiaomi {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+            }
+            huawei {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huawei"]
+            }
+            yingyongbao {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
+            }
+            meizu {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "meizu"]
+            }
+
+
+        }
     }
     buildTypes {
         release {
@@ -33,4 +67,7 @@ dependencies {
     compile files('libs/universal-image-loader-1.9.2-with-sources.jar')
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'org.xutils:xutils:3.3.38'
+
+//友盟下载 sdk
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }
