@@ -6,10 +6,11 @@ package com.zhoumai.qingtao.interf;
  * @author deyi
  *
  */
+@SuppressWarnings("unused")
 public interface BaseViewInterface {
 	
-	public void initView();
+	  void initView();
 	
-	public void initData();
+	  void initData();
 	
 }

@@ -1,0 +1,18 @@
+1. activityFinishUtils app退出的方法
+2. apputils 获取应用程序包名 获取应用程序版本信息
+3. bitmaputil 压缩图片三种方式 bitmap转化为字节流 bitmap保存到TEMPFILE路径 设置旋转 网络加载图片 圆角图片   不带缓存的加载图片
+4. DataCleanManger  缓存管理
+5.  DensityUtils 单位转换
+6. GetSystem 打印信息 MD5加密 获取版本信息 验证手机格式 判断网络状态
+7.  JsonUtil 解析者json  和json相关的都可以
+8.  KeyBoardUtils 调用系统键盘的
+9 . Log统一管理类
+10. MeasureSpecUtil 打印宽和高测量规格的具体信息
+11. NetUtils 网络监测 判断网络是否连接 判断是否连接WiFi  打开设置界面
+12. ProgressDialogUtil 进度条对话框 设置mess 显示 判断是否在运行
+12. SDCardUtils sd卡相关
+13, SpUtils
+14. StringUtils 字符串操作 时间格式转换 判断字符串 截取 ...
+15.  T toast管理
+16. TimeProcess 时间管理
+17. uiutils 界面的一些特效 包括toast中间显示 .

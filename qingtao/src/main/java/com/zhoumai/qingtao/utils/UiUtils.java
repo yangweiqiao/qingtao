@@ -11,7 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zhoumai.qingtao.base.baseapplication.MyApp;
+import com.zhoumai.qingtao.view.base.application.MyApp;
 
 import java.util.Random;
 
@@ -26,12 +26,12 @@ public class UiUtils {
 	 * 在屏幕的中央显示一个Toast
 	 * @param text
 	 */
-	public static void showToast(CharSequence text) {
+	public static void showToast (CharSequence text) {
 		Toast toast = Toast.makeText(MyApp.getContext(), text, Toast.LENGTH_SHORT);
 		toast.setGravity(Gravity.CENTER, 0, 0);// 设置Toast的显示位置在屏幕的中央
 		toast.show();
 	}
-	
+
 	/**
 	 * 把一个dp单位的值转换为px（像素）
 	 * @param dp

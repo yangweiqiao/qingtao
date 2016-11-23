@@ -9,9 +9,10 @@ import android.view.View;
  * @created 2014年9月25日 上午11:00:25
  *
  */
+@SuppressWarnings("unused")
 public interface BaseFragmentInterface {
 	
-	public void initView(View view);
+	  void initView(View view);
 	
-	public void initData();
+	  void initData();
 }
