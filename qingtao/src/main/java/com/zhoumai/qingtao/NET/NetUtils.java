@@ -4,13 +4,13 @@ package com.zhoumai.qingtao.NET;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
+import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.zhoumai.qingtao.view.base.application.MyApp;
-import com.zhoumai.qingtao.interf.onRequestDataFinish;
 import com.zhoumai.qingtao.utils.T;
 
 import java.io.BufferedReader;
@@ -34,7 +34,7 @@ import java.util.Set;
 public class NetUtils {
 
 
-    private static final String HOSTURL = "http://www.qingtaowang.com/";
+    private static final String HOSTURL = "http://139.224.222.130:8882/";
 
     /**
      * 请求数据示例:
@@ -232,12 +232,52 @@ public class NetUtils {
      * @param map  参数
      * @param listener  监听接口
      */
-    private static void getDataFromNet(String cacheFileName, final String catalog, final HashMap map, final onRequestDataFinish listener) {
-
+    private static void getDataFromNet(final String cacheFileName, final String catalog, final HashMap map, final onRequestDataFinish listener) {
 
 
 /**获取OKHTTPclient对象*/
         OkHttpClient okHttpClient = MyApp.getOkHttpClient();
+
+        /*
+        判断请求是post还是get请求
+         */
+
+        if (null == map) {
+            //get请求
+            Request request = new Request.Builder()
+                    .url(HOSTURL +catalog)
+                    .build();
+
+            okHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    listener.requestdataFailed( );
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                   String  json = response.body().string();
+
+listener.requestdataFinish(json);
+
+
+                    /**
+                     * 请求完数据之后 做数据的缓存判断
+                     */
+
+                    if (null != cacheFileName) { //判断需要缓存的文件名字
+                        /**需要缓存 */
+                        cacheData(json, catalog);
+                    }
+
+                }
+
+
+            });
+
+
+        } else {
+
 /**以自己的方式创建请求体**/
         FormEncodingBuilder builder = new FormEncodingBuilder();
         Set<String> set = map.keySet();
@@ -246,23 +286,8 @@ public class NetUtils {
             builder.add(key, (String) map.get(key));
         }
 
-//遍历map集合 添加参数到请求体中
-//        for (Iterator iter = set.iterator(); iter.hasNext(); ) {
-//
-//            String key = (String) iter.next();
-//            String value = (String) map.get(key);
-//
-//            builder.add(key, value);
-//
-//        }
         RequestBody requestBody = builder.build();
 
-
-//        RequestBody requestBody = new FormEncodingBuilder()
-//                .add("username", "wangwu")
-//                .add("password", "hello12345")
-//                .add("gender", "female")
-//                .build();
 
         Request request = new Request.Builder()
                 .url(HOSTURL + catalog) //catalog 参数是传入的界面类型
@@ -276,6 +301,8 @@ public class NetUtils {
                 Response response1 = response.networkResponse();
                 String json = response.body().string();
                 listener.requestdataFinish(json);
+
+
                 /**
                  * 请求完数据之后 做数据的缓存判断
                  */
@@ -295,7 +322,7 @@ public class NetUtils {
             throw new RuntimeException("联网请求数据发生异常----------" + e);
         }
 
-
+    }
     }
 
 

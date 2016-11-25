@@ -1,9 +1,10 @@
-package com.zhoumai.qingtao.utils;
+package com.zhoumai.qingtao.NET;
 
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.zhoumai.qingtao.utils.L;
 
 import org.json.JSONException;
 import org.json.JSONObject;

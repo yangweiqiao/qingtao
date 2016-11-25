@@ -3,17 +3,18 @@ package com.zhoumai.qingtao.view.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.zhoumai.qingtao.NET.Api;
+import com.zhoumai.qingtao.NET.JsonUtil;
+import com.zhoumai.qingtao.NET.NetUtils;
 import com.zhoumai.qingtao.R;
+import com.zhoumai.qingtao.NET.onRequestDataFinish;
+import com.zhoumai.qingtao.model.Brand;
+import com.zhoumai.qingtao.model.BrandInfo;
 import com.zhoumai.qingtao.utils.ActivityFinishUtils;
-import com.zhoumai.qingtao.utils.T;
 import com.zhoumai.qingtao.view.customview.NoscrollViewPager;
 import com.zhoumai.qingtao.view.fragment.CategoryFragment;
 import com.zhoumai.qingtao.view.fragment.GoodsFragment;
@@ -24,12 +25,11 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * 程序的主界面
  */
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements onRequestDataFinish {
 
 
     @BindView(R.id.home_tab)
@@ -91,6 +91,17 @@ public class MainActivity extends FragmentActivity {
 
                     case R.id.category_tab:
                         noscrollViewPager.setCurrentItem(1,false);
+NetUtils.requestData(Api.API_CAT_BRAND, null, new onRequestDataFinish() {
+    @Override
+    public void requestdataFinish(String xml) {
+        System.out.println("解析的数据是::::::+"+xml);
+    }
+
+    @Override
+    public void requestdataFailed() {
+
+    }
+}, false);
 
                         break;
                     case R.id.goods_tab:
@@ -142,9 +153,20 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         // TODO Auto-generated method stub
+
+        NetUtils.requestData(Api.ACCOUNT_SAVE, null, this, false);
         super.onDestroy();
 
     }
 
 
+    @Override
+    public void requestdataFinish(String xml) {
+
+    }
+
+    @Override
+    public void requestdataFailed() {
+
+    }
 }

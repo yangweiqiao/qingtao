@@ -3,7 +3,7 @@ package com.zhoumai.qingtao.view.fragment;
 import android.widget.TextView;
 
 import com.zhoumai.qingtao.model.Address;
-import com.zhoumai.qingtao.utils.JsonUtil;
+import com.zhoumai.qingtao.NET.JsonUtil;
 import com.zhoumai.qingtao.view.fragment.base.BaseFragemnt;
 
 
