@@ -1,37 +1,52 @@
 package com.zhoumai.qingtao.view.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.widget.ImageButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TabHost;
-import android.widget.TextView;
 
 import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.utils.ActivityFinishUtils;
-import com.zhoumai.qingtao.view.adapter.MyViewPageAdapter;
-import com.zhoumai.qingtao.view.fragment.base.BaseFragemnt;
+import com.zhoumai.qingtao.utils.T;
+import com.zhoumai.qingtao.view.customview.NoscrollViewPager;
+import com.zhoumai.qingtao.view.fragment.CategoryFragment;
+import com.zhoumai.qingtao.view.fragment.GoodsFragment;
+import com.zhoumai.qingtao.view.fragment.HomeFragment;
+import com.zhoumai.qingtao.view.fragment.MeFragment;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 程序的主界面
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
 
-    @BindView(R.id.toolbar)  //toolbar 
-            Toolbar toolbar;
-    @BindView(R.id.iv_seacher)  //搜索按钮
-            ImageButton ivSeacher;
-    /**
-     * FragmentTabHost相关
-     */
-    private FragmentTabHost tabhost;
-    private TabHost.TabSpec tab;
+    @BindView(R.id.home_tab)
+    RadioButton homeTab;
+    @BindView(R.id.category_tab)
+    RadioButton categoryTab;
+    @BindView(R.id.goods_tab)
+    RadioButton goodsTab;
+    @BindView(R.id.me_tab)
+    RadioButton meTab;
+    @BindView(R.id.home_tab_group)
+    RadioGroup homeTabGroup;
+    @BindView(R.id.noscrollViewPager)
+    NoscrollViewPager noscrollViewPager;
+
+
+    ArrayList<Fragment> fragments = new ArrayList<Fragment>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         //记录activity到集合
         ActivityFinishUtils.addActivity(this);
-        initTab();
+
         /**
          * 初始化数据
          */
@@ -51,74 +66,85 @@ public class MainActivity extends AppCompatActivity {
  * 初始化监听器 主要是底部的按钮
  */
         initListener();
-//   viewpager      vpContentPagers;vpContentPagers
 
-        init();
     }
 
     private void initListener() {
+        //设置viewpager的默认加载页数
+        noscrollViewPager.setOffscreenPageLimit(fragments.size() - 1);
+        //默认显示首页
+        noscrollViewPager.setCurrentItem(0);
+
+/**
+ * 底部的radiogroup的监听事件
+ */
+        homeTabGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int iposition) {
+
+
+                switch (iposition) {
+                    case R.id.home_tab:
+                        noscrollViewPager.setCurrentItem(0,false);
+
+                        break;
+
+                    case R.id.category_tab:
+                        noscrollViewPager.setCurrentItem(1,false);
+
+                        break;
+                    case R.id.goods_tab:
+                        noscrollViewPager.setCurrentItem(2,false);
+
+                        break;
+                    case R.id.me_tab:
+                        noscrollViewPager.setCurrentItem(3,false);
+
+                        break;
+
+                }
+            }
+        });
 
     }
+
 
     /**
-     * fragment 1 2 3 4对应下面的4个按钮
-     */
-    private void initTab() {
-        /**
-         * 查找控件
-         */
-        tabhost = (FragmentTabHost) findViewById(android.R.id.tabhost);
-        /**
-         * 设置内容
-         */
-        tabhost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
-        tab = tabhost.newTabSpec("fragment1");
-        /** 设置显示的view **/
-        TextView textView = new TextView(this);
-        textView.setText("首页");
-        //View inflate = View.inflate(this, R.layout.splash, null);
-        tab.setIndicator(textView);//这里添加的参数是view 可以使布局文件 也可以是创建的view对象
-        tabhost.addTab(tab, BaseFragemnt.class, null);
-
-        /*同样的方式添加剩下的tab */
-
-
-        tab = tabhost.newTabSpec("fragment2");
-        /** 设置显示的view **/
-        TextView textView2 = new TextView(this);
-        textView.setText("首页2");
-        tab.setIndicator(textView);//这里添加的参数是view 可以使布局文件 也可以是创建的view对象
-        tabhost.addTab(tab, BaseFragemnt.class, null);
-
-        tab = tabhost.newTabSpec("fragment3");
-        /** 设置显示的view **/
-        TextView textView3 = new TextView(this);
-        textView.setText("首页3");
-        tab.setIndicator(textView);//这里添加的参数是view 可以使布局文件 也可以是创建的view对象
-        tabhost.addTab(tab, BaseFragemnt.class, null);
-
-        tab = tabhost.newTabSpec("fragment4");
-        /** 设置显示的view **/
-        TextView textView4 = new TextView(this);
-        textView.setText("首页3");
-        tab.setIndicator(textView);//这里添加的参数是view 可以使布局文件 也可以是创建的view对象
-        tabhost.addTab(tab, BaseFragemnt.class, null);
-
-
-    }
-
-
+     * 初始化数据
+     **/
     private void initDatas() {
+        /**
+         * 添加四个fragment到集合中
+         */
+        fragments.add(new HomeFragment());
+        fragments.add(new CategoryFragment());
+        fragments.add(new GoodsFragment());
+        fragments.add(new MeFragment());
+        /**
+         * 设置适配器
+         */
+        noscrollViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
 
-        MyViewPageAdapter adapter = new MyViewPageAdapter(null);
+            @Override
+            public int getCount() {
+                return fragments.size();
+            }
 
+        });
 
     }
 
-    private void init() {
-//默认显示首页
 
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
 
     }
+
 
 }

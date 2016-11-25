@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import com.zhoumai.qingtao.R;
 
-import org.xutils.view.annotation.ViewInject;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

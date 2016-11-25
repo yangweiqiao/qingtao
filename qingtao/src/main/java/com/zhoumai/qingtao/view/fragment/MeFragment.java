@@ -1,6 +1,9 @@
 package com.zhoumai.qingtao.view.fragment;
 
+import android.widget.TextView;
+
 import com.zhoumai.qingtao.view.fragment.base.BaseFragemnt;
+
 
 
 
@@ -19,7 +22,9 @@ public class MeFragment extends BaseFragemnt {
 
     @Override
     public Object getContentView() {
-        return null;
+        TextView textView = new TextView(context);
+        textView.setText("你好.这是我的界面,显示的是加载成功的界面 ");
+        return textView;
     }
 
     @Override

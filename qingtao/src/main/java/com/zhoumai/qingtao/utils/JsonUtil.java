@@ -43,7 +43,7 @@ public class JsonUtil {
 		try {
 			t = gson.fromJson(json, cls);
 		} catch (Exception e) {
-			Logger.i("JsonUtil", "解析json数据时出现异常\njson = " + json );
+			L.i("JsonUtil", "解析json数据时出现异常\njson = " + json );
 		}
 		return t;
 	}
@@ -60,7 +60,7 @@ public class JsonUtil {
 		try {
 			map = gson.fromJson(json, type);
 		} catch (Exception e) {
-			Logger.i("JsonUtil", "解析json数据时出现异常\njson = " + json );
+			L.i("JsonUtil", "解析json数据时出现异常\njson = " + json );
 		}
 		return map;
 	}

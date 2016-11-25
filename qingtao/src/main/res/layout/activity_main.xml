@@ -1,38 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+ <com.zhoumai.qingtao.view.customview.NoscrollViewPager
+     android:id="@+id/noscrollViewPager"
+     android:layout_width="match_parent"
+     android:layout_height="0dp"
+     android:layout_weight="1"
+     ></com.zhoumai.qingtao.view.customview.NoscrollViewPager>
 
-    <LinearLayout
+
+    <RadioGroup
+        android:id="@+id/home_tab_group"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- 添加图片的时候使用选择器  文字的颜色也要使用选择器 -->
+        <RadioButton
+            android:id="@+id/home_tab"
+            style="@style/bottomStyle"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:text="首页" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/category_tab"
+            style="@style/bottomStyle"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:text="分类" />
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#40AA53"
+        <RadioButton
+            android:id="@+id/goods_tab"
+            style="@style/bottomStyle"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:text="订单" />
 
-                app:title="轻淘 "/>
-
-            <ImageButton
-                android:id="@+id/iv_seacher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@android:color/transparent"
-                android:paddingBottom="5dp"
-                android:src="@drawable/button_red_normal"/>
-        </RelativeLayout>
+        <RadioButton
+            android:id="@+id/me_tab"
+            style="@style/bottomStyle"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:text="我的" />
 
 
-    </LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
+    </RadioGroup>
+
+
+</LinearLayout>

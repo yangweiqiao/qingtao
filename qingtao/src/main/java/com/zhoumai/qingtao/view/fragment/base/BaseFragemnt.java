@@ -5,15 +5,16 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.NET.JsonRequestCallback;
-import com.zhoumai.qingtao.utils.L;
+
 import com.zhoumai.qingtao.view.customview.StateLayout;
 
 
@@ -26,7 +27,7 @@ import com.zhoumai.qingtao.view.customview.StateLayout;
 public abstract class BaseFragemnt extends Fragment implements JsonRequestCallback {
 
     protected Activity context;
-    protected StateLayout stateLayout;
+   public StateLayout stateLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public abstract class BaseFragemnt extends Fragment implements JsonRequestCallba
         context = getActivity();
         // inflate方法返回值就是填充的布局的根控件
         // 填充出来的StateLayout已经包含了3种状态了
-        stateLayout = (StateLayout) inflater.inflate(R.layout.state_layout, null);
+          stateLayout = (StateLayout) inflater.inflate(R.layout.state_layout, null);
 
         // 设置第4种状态：正常界面的状态。由于这里是Base类，Base类没有办法知道子View需要设置的正常界面是什么，所以正常界面的获取写成抽象方法由子类自己去实现。
         stateLayout.setContentView(getContentView());

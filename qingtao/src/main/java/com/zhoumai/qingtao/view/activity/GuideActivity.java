@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 
 import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.utils.ActivityFinishUtils;
+import com.zhoumai.qingtao.utils.DensityUtils;
 import com.zhoumai.qingtao.view.base.application.MyApp;
 import com.zhoumai.qingtao.utils.SpUtils;
 
@@ -75,7 +76,7 @@ public class GuideActivity extends Activity implements View.OnClickListener {
             // 计算红点要移动的距离 = 手指移动的距离/屏幕的宽度 * 灰点的间距
             // 移动的距离 = positionOffset * 灰点的间距
 
-            int bigPointX = (int) ((positionOffset + position) * DensityUtil.dip2px(MyApp.getContext(), 20)); //30是自己计算出来的 15灰色圆点半径 +灰色圆点之间的间距
+            int bigPointX = (int) ((positionOffset + position) * DensityUtils.dip2px(MyApp.getContext(), 20)); //30是自己计算出来的 15灰色圆点半径 +灰色圆点之间的间距
             // 移动红点，不停的修改红点的左边距
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ivGuideBigpoint.getLayoutParams();
             params.leftMargin = bigPointX;
@@ -126,7 +127,7 @@ public class GuideActivity extends Activity implements View.OnClickListener {
             ImageView point = new ImageView(this);
             point.setBackgroundResource(R.drawable.guide_point_normal);
             // 给灰点设置宽高,需要导包Linearlayout中的LayoutParams
-            int dp2px = DensityUtil.dip2px(MyApp.getContext(), 10);// 根据手机获取15dp对应的px值
+            int dp2px = DensityUtils.dip2px(MyApp.getContext(), 10);// 根据手机获取15dp对应的px值
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dp2px, dp2px);// 10指的是像素
             // 设置左边距,第一个点的左边距不要，为了让中间的灰点显示在屏幕的水平居中
             if (i != 0) {
