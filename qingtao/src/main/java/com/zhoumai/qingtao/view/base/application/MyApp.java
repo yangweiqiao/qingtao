@@ -16,6 +16,8 @@ import com.zhoumai.qingtao.utils.NetUtils;
 
 import java.util.concurrent.TimeUnit;
 
+import cn.sharesdk.framework.ShareSDK;
+
 /**
  * Created by 杨伟乔 on 2016/11/21.
  * 配置全局的变量
@@ -49,9 +51,14 @@ public class MyApp extends Application {
         return cacheFileExpiryDate;
     }
 
-    /** 获取application对象@return*/
-    public  static MyApp instance;
-    public static MyApp getInstance() {return instance;}
+    /**
+     * 获取application对象@return
+     */
+    public static MyApp instance;
+
+    public static MyApp getInstance() {
+        return instance;
+    }
 
     /**
      * 保存当前的用户对象在全局的位置
@@ -77,19 +84,23 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         TAG = this.getClass().getSimpleName();
+        //// TODO: 2016/11/27 初始化sdk  初始化第一个参数传当前activity的context对象，第二个参数传ShareSDK的appkey，第二个参数可以省略不传，因为sharesdk.xml已经配置，默认会访问的；
+       // 初始化的代码尽量放到调用分享的activity的入口oncreat下就好，尽量不要再application里初始化，也可以多次调用初始化ShareSDK，
+       // 初始化ShareSDK必须放到所有调用ShareSDK的最前端。
+        ShareSDK.initSDK(this, "sharesdk的appkey");
+
         //由于Application类本身已经单例，所以直接按以下处理即可。
         instance = this;
         context = getApplicationContext();
-     MobclickAgent.openActivityDurationTrack(false); //禁止默认的页面统计方式，这样将不会再自动统计Activity。
+        MobclickAgent.openActivityDurationTrack(false); //禁止默认的页面统计方式，这样将不会再自动统计Activity。
 
-         MobclickAgent.enableEncrypt(true);//加密日志的设置
+        MobclickAgent.enableEncrypt(true);//加密日志的设置
         initImageLoader(getApplicationContext());
         //根据网络的情况指定缓存文件的有效期
         boolean connected = NetUtils.isConnected(this);  //连接状态
-        if(connected){
-            cacheFileExpiryDate=1*1000*60;  //6分钟
-        }else {
-
+        if (connected) {
+            cacheFileExpiryDate = 1 * 1000 * 60;  //6分钟
+        } else {
 
 
         }
@@ -136,12 +147,12 @@ public class MyApp extends Application {
      * 获取okhttpclient对象
      */
     public static OkHttpClient getOkHttpClient() {
-        if(okHttpClient!=null){
+        if (okHttpClient != null) {
             return okHttpClient;
-        }else{
+        } else {
             okHttpClient = new OkHttpClient();
             okHttpClient.setConnectTimeout(15, TimeUnit.SECONDS);
-            okHttpClient.setReadTimeout(15,TimeUnit.SECONDS );
+            okHttpClient.setReadTimeout(15, TimeUnit.SECONDS);
             return okHttpClient;
         }
 
@@ -149,20 +160,17 @@ public class MyApp extends Application {
 
 }
 /**
- *
  * 3.3.1  统计发生次数
-
- 在您希望跟踪的代码部分，调用如下方法：
-
- MobclickAgent.onEvent(Context context, String eventId);
-
- context 指当前的Activity
-
- eventId 为当前统计的事件ID。
-
- 示例：统计微博应用中"转发"事件发生的次数，那么在转发的函数里调用
-
- MobclickAgent.onEvent(mContext,"Forward");
-
-
+ * <p>
+ * 在您希望跟踪的代码部分，调用如下方法：
+ * <p>
+ * MobclickAgent.onEvent(Context context, String eventId);
+ * <p>
+ * context 指当前的Activity
+ * <p>
+ * eventId 为当前统计的事件ID。
+ * <p>
+ * 示例：统计微博应用中"转发"事件发生的次数，那么在转发的函数里调用
+ * <p>
+ * MobclickAgent.onEvent(mContext,"Forward");
  */

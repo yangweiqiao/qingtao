@@ -16,6 +16,14 @@
 
     </LinearLayout>
     <!--顶部的指示器 采用的是水平的scrollview  禁止拦截上下滑动的事件-->
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        />
+
+
     <HorizontalScrollView
         android:id="@+id/horizontalscrollview"
         android:layout_width="wrap_content"
