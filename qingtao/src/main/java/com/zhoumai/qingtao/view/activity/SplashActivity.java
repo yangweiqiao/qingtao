@@ -8,7 +8,10 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.R;
+import com.zhoumai.qingtao.contains.Contains;
+import com.zhoumai.qingtao.utils.ActivityFinishUtils;
 import com.zhoumai.qingtao.view.base.application.MyApp;
 import com.zhoumai.qingtao.utils.SpUtils;
 
@@ -19,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * splash界面
  */
-public class SplashActivity extends AppCompatActivity implements Animation.AnimationListener {
+public class SplashActivity extends BaseActivity implements Animation.AnimationListener {
     //动画
     private AlphaAnimation animation;
     //延迟时间
@@ -38,15 +41,15 @@ public class SplashActivity extends AppCompatActivity implements Animation.Anima
         //初始化监听
         initListener();
 
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-
-
-            }
-        }, SPLASH_DISPLAY_LENGHT);
+        ActivityFinishUtils.addActivity(this);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//这个方法暂时不用  使用动画的监听来完成功能的实现
+//
+//            }
+//        }, SPLASH_DISPLAY_LENGHT);
     }
 
     /**
@@ -83,7 +86,7 @@ public class SplashActivity extends AppCompatActivity implements Animation.Anima
 /*
 动画结束之后 判断用户是否是第一次登陆
  */
-        boolean is_frist = SpUtils.getBoolean(MyApp.IS_FRIST);//默认值是false 表示用户第一次登陆  登陆成功之后可以存储为true
+        boolean is_frist = SpUtils.getBoolean(Contains.IS_FRIST);//默认值是false 表示用户第一次登陆  登陆成功之后可以存储为true
         //创建意图
          Intent intent;
         if(!is_frist){
@@ -106,5 +109,15 @@ public class SplashActivity extends AppCompatActivity implements Animation.Anima
     @Override
     public void onAnimationRepeat(Animation animation) {
 
+    }
+
+//
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

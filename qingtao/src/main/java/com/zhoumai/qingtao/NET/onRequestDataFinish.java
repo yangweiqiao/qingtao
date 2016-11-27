@@ -11,7 +11,7 @@ public interface onRequestDataFinish {
     /**
      * 数据请求完成调用
      **/
-    void requestdataFinish(String xml);
+    void requestdataFinish(String json);
 
     /**
      * 数据请求失败

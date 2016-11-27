@@ -1,5 +1,6 @@
 package com.zhoumai.qingtao.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -7,14 +8,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.NET.Api;
 import com.zhoumai.qingtao.NET.JsonUtil;
 import com.zhoumai.qingtao.NET.NetUtils;
 import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.NET.onRequestDataFinish;
+import com.zhoumai.qingtao.contains.Contains;
 import com.zhoumai.qingtao.model.Brand;
 import com.zhoumai.qingtao.model.BrandInfo;
 import com.zhoumai.qingtao.utils.ActivityFinishUtils;
+import com.zhoumai.qingtao.utils.SpUtils;
 import com.zhoumai.qingtao.view.customview.NoscrollViewPager;
 import com.zhoumai.qingtao.view.fragment.CategoryFragment;
 import com.zhoumai.qingtao.view.fragment.GoodsFragment;
@@ -29,7 +33,7 @@ import butterknife.ButterKnife;
 /**
  * 程序的主界面
  */
-public class MainActivity extends FragmentActivity implements onRequestDataFinish {
+public class MainActivity extends BaseActivity implements onRequestDataFinish {
 
 
     @BindView(R.id.home_tab)
@@ -57,6 +61,9 @@ public class MainActivity extends FragmentActivity implements onRequestDataFinis
         //记录activity到集合
         ActivityFinishUtils.addActivity(this);
 
+
+
+
         /**
          * 初始化数据
          */
@@ -68,6 +75,8 @@ public class MainActivity extends FragmentActivity implements onRequestDataFinis
         initListener();
 
     }
+
+
 
     private void initListener() {
         //设置viewpager的默认加载页数
@@ -168,5 +177,17 @@ NetUtils.requestData(Api.API_CAT_BRAND, null, new onRequestDataFinish() {
     @Override
     public void requestdataFailed() {
 
+    }
+
+
+
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

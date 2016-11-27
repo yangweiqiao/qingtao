@@ -2,6 +2,7 @@ package com.zhoumai.qingtao.view.fragment;
 
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.model.Address;
 import com.zhoumai.qingtao.NET.JsonUtil;
 import com.zhoumai.qingtao.view.fragment.base.BaseFragemnt;
@@ -42,11 +43,24 @@ public class CategoryFragment extends BaseFragemnt {
 stateLayout.showEmptyView();
     }
 
-    @Override
-    public void onRequestFinish(String json) {
-//解析数据
-        Address address = JsonUtil.parseJsonToBean(json, Address.class);
 
-        //检查数据
+
+    @Override
+    public void requestdataFinish(String json) {
+
+    }
+
+    @Override
+    public void requestdataFailed() {
+
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("CategoryFragment"); //统计页面，"MainScreen"为页面名称，可自定义
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("CategoryFragment");
     }
 }

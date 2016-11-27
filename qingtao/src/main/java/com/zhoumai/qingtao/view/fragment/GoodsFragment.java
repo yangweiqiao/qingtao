@@ -3,6 +3,7 @@ package com.zhoumai.qingtao.view.fragment;
 
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.view.fragment.base.BaseFragemnt;
 
 /**
@@ -40,8 +41,23 @@ public class GoodsFragment extends BaseFragemnt {
         stateLayout.showFailView();
     }
 
-    @Override
-    public void onRequestFinish(String json) {
 
+
+    @Override
+    public void requestdataFinish(String json) {
+
+    }
+
+    @Override
+    public void requestdataFailed() {
+
+    }
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("GoodsFragment"); //统计页面，"MainScreen"为页面名称，可自定义
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("GoodsFragment");
     }
 }

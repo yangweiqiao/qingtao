@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -283,7 +284,7 @@ listener.requestdataFinish(json);
         Set<String> set = map.keySet();
 
         for (String key : set) {
-            builder.add(key, (String) map.get(key));
+            builder.add(key,String.valueOf(map.get(key)));
         }
 
         RequestBody requestBody = builder.build();

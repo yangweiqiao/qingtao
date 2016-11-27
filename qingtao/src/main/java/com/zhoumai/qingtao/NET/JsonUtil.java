@@ -18,7 +18,7 @@ import java.util.Map;
  * @author Administrator
  *
  */
-public class JsonUtil {
+public class JsonUtil  {
 	/**
 	 * 把一个map变成json字符串
 	 * @param map

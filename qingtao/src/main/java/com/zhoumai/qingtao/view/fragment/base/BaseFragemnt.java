@@ -5,15 +5,14 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zhoumai.qingtao.NET.onRequestDataFinish;
 import com.zhoumai.qingtao.R;
-import com.zhoumai.qingtao.NET.JsonRequestCallback;
 
 import com.zhoumai.qingtao.view.customview.StateLayout;
 
@@ -24,7 +23,7 @@ import com.zhoumai.qingtao.view.customview.StateLayout;
  * @author dzl
  */
 @SuppressWarnings("unused")
-public abstract class BaseFragemnt extends Fragment implements JsonRequestCallback {
+public abstract class BaseFragemnt extends Fragment implements onRequestDataFinish {
 
     protected Activity context;
    public StateLayout stateLayout;

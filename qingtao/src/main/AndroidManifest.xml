@@ -4,6 +4,7 @@
 
     <!-- 配置友盟的 开始 -->
     <uses-sdk android:minSdkVersion="4"></uses-sdk>
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -31,6 +32,10 @@
         <activity android:name=".view.activity.GuideActivity" />
         <!-- 主界面-->
         <activity android:name=".view.activity.MainActivity" />
+        <!--登录界面 -->
+        <activity android:name=".view.activity.LoginActivity" />
+        <!-- 基类 -->
+        <activity android:name=".view.activity.BaseActivity" />
 
         <!--配置友盟-->
         <meta-data

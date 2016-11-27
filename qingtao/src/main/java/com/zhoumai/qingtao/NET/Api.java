@@ -8,17 +8,24 @@ package com.zhoumai.qingtao.NET;
  */
 @SuppressWarnings("unused")
 public interface Api {
+    /**
+     * 登录
+     */
+    String API_LOGIN = "/mobi/login/wxLogin";
 
+
+    /**
+     * 登陆
+     *
+     */
+    String LOGIN = "/mobi/login/userLogin";
     /**
      *  服务器图片
      */
 
     String API_IMG = "http://image.qingtaoapp.com";
 
-    /**
-     * 登录
-     */
-     String API_LOGIN = "/mobi/login/wxLogin";
+
     /**
      * 爆款推荐分页接口
      */
@@ -201,11 +208,7 @@ public interface Api {
      */
     String ADVERTISEMENT_LIST="/mobi/advertisement/list";
 
-    /**
-     * 登陆
-     *
-     */
-    String LOGIN = "/mobi/login/userLogin";
+
     /**
      * 发送验证码
      */

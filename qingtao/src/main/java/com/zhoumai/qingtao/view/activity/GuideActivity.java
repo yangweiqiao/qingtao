@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.R;
+import com.zhoumai.qingtao.contains.Contains;
 import com.zhoumai.qingtao.utils.ActivityFinishUtils;
 import com.zhoumai.qingtao.utils.DensityUtils;
 import com.zhoumai.qingtao.view.base.application.MyApp;
@@ -29,7 +31,7 @@ import butterknife.ButterKnife;
  * 我们需要添加界面的时候只需要添加图片即可
  * 实现了下面的圆点指示器
  */
-public class GuideActivity extends Activity implements View.OnClickListener {
+public class GuideActivity extends BaseActivity implements View.OnClickListener {
 
 
     @BindView(R.id.vp_guide_bg)
@@ -173,12 +175,12 @@ public class GuideActivity extends Activity implements View.OnClickListener {
 
     public void onResume() {
         super.onResume();
-        //  MobclickAgent.onResume(this);
+          MobclickAgent.onResume(this);
     }
 
     public void onPause() {
         super.onPause();
-        //MobclickAgent.onPause(this);
+        MobclickAgent.onPause(this);
     }
 
 
@@ -191,9 +193,11 @@ public class GuideActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         startActivity(new Intent(this, MainActivity.class));
         // 把是否应用第一次打开标记保存为true
-        SpUtils.setBoolean("is_first", true);
+        SpUtils.setBoolean(Contains.IS_FRIST, true);
         finish();
     }
+
+
 }
 
 
