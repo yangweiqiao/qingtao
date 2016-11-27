@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/newstudiowrok.iml" filepath="$PROJECT_DIR$/newstudiowrok.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pullToRefreshLibrary/pullToRefreshLibrary.iml" filepath="$PROJECT_DIR$/pullToRefreshLibrary/pullToRefreshLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/qingtao/qingtao.iml" filepath="$PROJECT_DIR$/qingtao/qingtao.iml" />
     </modules>
   </component>

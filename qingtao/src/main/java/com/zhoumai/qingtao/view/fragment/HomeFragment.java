@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.R;
@@ -232,7 +233,7 @@ public class HomeFragment extends BaseFragemnt implements View.OnClickListener {
         privateImg6=  findView(R.id.img6);
         privateViewpager=  findView(R.id.viewpager);
 
-        ListView view = findView(R.id.home_listview);
+        PullToRefreshListView view = findView(R.id.home_listview);
         view.setAdapter(new HomeListAdapter(null));
     }
 

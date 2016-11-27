@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PullToRefresh">
+
+        <!-- A drawable to use as the background of the Refreshable View -->
+        <!-- 一个drawable，用作可刷新View的背景 ，可刷新View包括（ListView、GridView、ViewPager等等）-->
+        <attr name="ptrRefreshableViewBackground" format="reference|color" />
+
+        <!-- A drawable to use as the background of the Header and Footer Loading Views -->
+        <!-- 一个drawable，用作页眉、页脚正在加载View的的背景 -->
+        <attr name="ptrHeaderBackground" format="reference|color" />
+
+        <!-- Text Color of the Header and Footer Loading Views -->
+        <!-- 页眉、页脚正在加载View的文本颜色 -->
+        <attr name="ptrHeaderTextColor" format="reference|color" />
+
+        <!-- Text Color of the Header and Footer Loading Views Sub Header -->
+        <!-- 页头、页尾正在加载View的子标题的文本颜色(子标题，如：最后更新时间属性子标题) -->
+        <attr name="ptrHeaderSubTextColor" format="reference|color" />
+
+        <!-- Mode of Pull-to-Refresh that should be used -->
+        <!-- Pull-to-Refresh的模式，应该使用： -->
+        <attr name="ptrMode">
+            <!-- 禁止使用 -->
+            <flag name="disabled" value="0x0" />
+            <!-- 从开始位置拉 -->
+            <flag name="pullFromStart" value="0x1" />
+            <!-- 从结束位置拉 -->
+            <flag name="pullFromEnd" value="0x2" />
+            <!-- 开始、结束都可以拉 -->
+            <flag name="both" value="0x3" />
+            <!-- 只允许手动触发，如点击一个按钮时触发下拉刷新 -->
+            <flag name="manualOnly" value="0x4" />
+
+            <!-- These last two are depreacted -->
+            <!-- 这最后两个已经过时 -->
+            <flag name="pullDownFromTop" value="0x1" />
+            <flag name="pullUpFromBottom" value="0x2" />
+        </attr>
+
+        <!-- Whether the Indicator overlay(s) should be used -->
+        <!-- 是否应该使用指示器叠加(s)，即在ListView上多显示一个指示器 -->
+        <attr name="ptrShowIndicator" format="reference|boolean" />
+
+        <!-- Drawable to use as Loading Indicator. Changes both Header and Footer. -->
+        <!-- Drawable，用作正在加载的指示器。页眉和页脚都会被改变 -->
+        <attr name="ptrDrawable" format="reference" />
+
+        <!-- Drawable to use as Loading Indicator in the Header View. Overrides value set in ptrDrawable. -->
+        <!-- Drawable，用作页眉View上的正在加载指示器。覆盖ptrDrawable属性的设置 -->
+        <attr name="ptrDrawableStart" format="reference" />
+
+        <!-- Drawable to use as Loading Indicator in the Footer View. Overrides value set in ptrDrawable. -->
+        <!-- Drawable，用作页脚View上的正在加载指示器。覆盖ptrDrawable属性的设置 -->
+        <attr name="ptrDrawableEnd" format="reference" />
+
+        <!-- Whether Android's built-in Over Scroll should be utilised for Pull-to-Refresh. -->
+        <!-- 经试验，这个属性功能为：设置为true，则在ListView上执行一个快速的Filling动作，
+        	   当滚动到第一个或最或一个item的时候还会自动把footer view或header view 滚动出来 -->
+        <attr name="ptrOverScroll" format="reference|boolean" />
+
+        <!-- Base text color, typeface, size, and style for Header and Footer Loading Views -->
+        <!-- 页眉和页脚加载视图的基本文本颜色、字体、大小和风格 -->
+        <attr name="ptrHeaderTextAppearance" format="reference" />
+
+        <!-- Base text color, typeface, size, and style for Header and Footer Loading Views Sub Header -->
+        <!-- 页眉和页脚加载视图的子标题的基本文本颜色、字体、大小和风格(子标题，如：最后更新时间属性子标题) -->
+        <attr name="ptrSubHeaderTextAppearance" format="reference" />
+
+        <!-- Style of Animation should be used displayed when pulling. -->
+        <!-- pulling的时候应该使用的动画风格。 -->
+        <attr name="ptrAnimationStyle">
+            <!-- rotate-旋转动画 ，flip-翻转动画  -->
+            <flag name="rotate" value="0x0" />
+            <flag name="flip" value="0x1" />
+        </attr>
+
+        <!-- Whether the user can scroll while the View is Refreshing -->
+        <!-- 当View正在Refreshing的时候用户是否可以滚动 -->
+        <attr name="ptrScrollingWhileRefreshingEnabled" format="reference|boolean" />
+
+        <!--
+        	Whether PullToRefreshListView has it's extras enabled. This allows the user to be 
+        	able to scroll while refreshing, and behaves better. It acheives this by adding
+        	Header and/or Footer Views to the ListView.
+        -->
+        <attr name="ptrListViewExtrasEnabled" format="reference|boolean" />
+
+        <!--
+        	Whether the Drawable should be continually rotated as you pull. This only
+        	takes effect when using the 'Rotate' Animation Style.
+        -->
+        <!-- 是否应该不断的旋转拉。这只有在使用旋转的动画风格的时候生效。 -->
+        <attr name="ptrRotateDrawableWhilePulling" format="reference|boolean" />
+
+        <!-- BELOW HERE ARE DEPRECEATED. DO NOT USE. -->
+        <!-- 下面的是过时的，不要使用 -->
+        <attr name="ptrAdapterViewBackground" format="reference|color" />
+        <attr name="ptrDrawableTop" format="reference" />
+        <attr name="ptrDrawableBottom" format="reference" />
+    </declare-styleable>
+
+</resources>
