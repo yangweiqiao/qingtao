@@ -14,7 +14,6 @@ import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.utils.T;
 import com.zhoumai.qingtao.view.adapter.CarouselViewpagerAdapter;
-import com.zhoumai.qingtao.view.adapter.HomeListAdapter;
 import com.zhoumai.qingtao.view.base.application.MyApp;
 import com.zhoumai.qingtao.view.fragment.base.BaseFragemnt;
 
@@ -62,6 +61,8 @@ public class HomeFragment extends BaseFragemnt implements View.OnClickListener {
     //加载网络图片的地址 集合
     ArrayList<String> imgurls;
 
+
+
     @Override
     public CharSequence getTitle() {
         return "首页";
@@ -74,12 +75,19 @@ public class HomeFragment extends BaseFragemnt implements View.OnClickListener {
  */
         View view = View.inflate(MyApp.getContext(), R.layout.fragment_home, null);
 
+        HorizontalListView horizon_listview = findView(R.id.horizon_listview);
+
         return view;
     }
 
 
     @Override
     public void initData() {
+/**
+ * 首页顶部的标题
+ */
+        String[] titels = {"首页","限量闪购","爆款拼团","品牌直购","轻淘返现"};
+
 
 
         //创建图片地址的集合
@@ -259,7 +267,7 @@ public class HomeFragment extends BaseFragemnt implements View.OnClickListener {
         });
 //        在获取数据的方法中判断模式 然后去请求对应的数据
         // view.getCurrentMode()== PullToRefreshBase.Mode.PULL_FROM_START;
-        view.setAdapter(new HomeListAdapter(null));
+      //  view.setAdapter(new HomeListAdapter(null));
 
 //指定的条目滑动到最顶端
         // list.setSelection(position - 1);

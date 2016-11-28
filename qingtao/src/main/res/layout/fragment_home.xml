@@ -6,22 +6,30 @@
     <!--  标题栏  -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:orientation="horizontal">
-
+        <!--放置logo的位置-->
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:src="@mipmap/yy20161127021425" />
+        <!--这个控件没什么用 就是为了让搜索的按钮靠右 -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1" />
+
+        <!--搜索的按钮-->
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/radiobutton_off_background"
+
+            />
+
 
     </LinearLayout>
     <!--顶部的指示器 采用的是水平的scrollview  禁止拦截上下滑动的事件-->
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        />
 
 
     <HorizontalScrollView
@@ -261,18 +269,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <!--把轮播图包含进来是为了一起滚动的效果-->
             <include layout="@layout/home_carousel" />
 
+
+
+
+
+            <!--可以刷新的listview  -->
             <com.handmark.pulltorefresh.library.PullToRefreshListView
                 android:id="@+id/home_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-
             </com.handmark.pulltorefresh.library.PullToRefreshListView>
-
-
 
 
         </LinearLayout>
