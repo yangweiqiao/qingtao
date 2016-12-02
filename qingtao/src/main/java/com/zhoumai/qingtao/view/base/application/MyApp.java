@@ -8,15 +8,14 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.squareup.okhttp.OkHttpClient;
+
 import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.model.Admin;
 import com.zhoumai.qingtao.utils.NetUtils;
 
-import java.util.concurrent.TimeUnit;
 
-import cn.sharesdk.framework.ShareSDK;
+
 
 /**
  * Created by 杨伟乔 on 2016/11/21.
@@ -33,10 +32,7 @@ public class MyApp extends Application {
      **/
     public static Admin.AdminBean user;
 
-    /**
-     * 创建okhttp链接对象
-     **/
-    public static OkHttpClient okHttpClient;
+
     /**
      * 指定缓存文件的有效期
      **/
@@ -87,7 +83,7 @@ public class MyApp extends Application {
         //// TODO: 2016/11/27 初始化sdk  初始化第一个参数传当前activity的context对象，第二个参数传ShareSDK的appkey，第二个参数可以省略不传，因为sharesdk.xml已经配置，默认会访问的；
        // 初始化的代码尽量放到调用分享的activity的入口oncreat下就好，尽量不要再application里初始化，也可以多次调用初始化ShareSDK，
        // 初始化ShareSDK必须放到所有调用ShareSDK的最前端。
-        ShareSDK.initSDK(this, "sharesdk的appkey");
+//        ShareSDK.initSDK(this, "sharesdk的appkey");
 
         //由于Application类本身已经单例，所以直接按以下处理即可。
         instance = this;
@@ -146,19 +142,7 @@ public class MyApp extends Application {
     /**
      * 获取okhttpclient对象
      */
-    public static OkHttpClient getOkHttpClient() {
-        if (okHttpClient != null) {
-            return okHttpClient;
-        } else {
-            okHttpClient = new OkHttpClient();
-            okHttpClient.setConnectTimeout(15, TimeUnit.SECONDS);
-            okHttpClient.setReadTimeout(15, TimeUnit.SECONDS);
-            return okHttpClient;
-        }
 
-    }
-
-}
 /**
  * 3.3.1  统计发生次数
  * <p>
@@ -174,3 +158,4 @@ public class MyApp extends Application {
  * <p>
  * MobclickAgent.onEvent(mContext,"Forward");
  */
+}

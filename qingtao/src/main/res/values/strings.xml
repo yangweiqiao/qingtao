@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">轻淘</string>
+    <string name="home_page">首页</string>
+    <string name="classify">分类</string>
+    <string name="shopping_cart">购物车</string>
+    <string name="me">我的</string>
+    <string name="limit">限量闪购</string>
+    <string name="group_buy">爆款拼团</string>
+    <string name="direct_purchase">品牌直购</string>
+    <string name="back_money">轻淘返现</string>
+    <string name="integral">积分</string>
+    <string name="fans">淘粉</string>
+    <string name="recommend">招兵买马</string>
+    <string name="wait_pay">代付款</string>
+    <string name="not_shipped">未发货</string>
+    <string name="wait_receiver">等收货</string>
+    <string name="appraise">去评价</string>
+    <string name="exchange">退换货</string>
+    <string name="favorite">我的收藏</string>
+    <string name="preferential">优惠券</string>
+    <string name="wallet">我的钱包</string>
+    <string name="business">我是商家</string>
+    <string name="member">我是会员</string>
+
 </resources>

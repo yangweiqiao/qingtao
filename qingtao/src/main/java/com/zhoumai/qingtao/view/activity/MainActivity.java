@@ -1,24 +1,17 @@
 package com.zhoumai.qingtao.view.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.NET.Api;
-import com.zhoumai.qingtao.NET.JsonUtil;
 import com.zhoumai.qingtao.NET.NetUtils;
-import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.NET.onRequestDataFinish;
-import com.zhoumai.qingtao.contains.Contains;
-import com.zhoumai.qingtao.model.Brand;
-import com.zhoumai.qingtao.model.BrandInfo;
+import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.utils.ActivityFinishUtils;
-import com.zhoumai.qingtao.utils.SpUtils;
 import com.zhoumai.qingtao.view.customview.NoscrollViewPager;
 import com.zhoumai.qingtao.view.fragment.CategoryFragment;
 import com.zhoumai.qingtao.view.fragment.GoodsFragment;
@@ -26,6 +19,7 @@ import com.zhoumai.qingtao.view.fragment.HomeFragment;
 import com.zhoumai.qingtao.view.fragment.MeFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +27,7 @@ import butterknife.ButterKnife;
 /**
  * 程序的主界面
  */
-public class MainActivity extends BaseActivity implements onRequestDataFinish {
+public class MainActivity extends BaseActivity implements onRequestDataFinish, RadioGroup.OnCheckedChangeListener {
 
 
     @BindView(R.id.home_tab)
@@ -87,44 +81,7 @@ public class MainActivity extends BaseActivity implements onRequestDataFinish {
 /**
  * 底部的radiogroup的监听事件
  */
-        homeTabGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int iposition) {
-
-
-                switch (iposition) {
-                    case R.id.home_tab:
-                        noscrollViewPager.setCurrentItem(0,false);
-
-                        break;
-
-                    case R.id.category_tab:
-                        noscrollViewPager.setCurrentItem(1,false);
-NetUtils.requestData(Api.API_CAT_BRAND, null, new onRequestDataFinish() {
-    @Override
-    public void requestdataFinish(String xml) {
-        System.out.println("解析的数据是::::::+"+xml);
-    }
-
-    @Override
-    public void requestdataFailed() {
-
-    }
-}, false);
-
-                        break;
-                    case R.id.goods_tab:
-                        noscrollViewPager.setCurrentItem(2,false);
-
-                        break;
-                    case R.id.me_tab:
-                        noscrollViewPager.setCurrentItem(3,false);
-
-                        break;
-
-                }
-            }
-        });
+        homeTabGroup.setOnCheckedChangeListener(this);
 
     }
 
@@ -170,12 +127,45 @@ NetUtils.requestData(Api.API_CAT_BRAND, null, new onRequestDataFinish() {
 
 
     @Override
-    public void requestdataFinish(String xml) {
+    public void requestdataFinish(String key, String xml) {
+
+        switch (key){
+
+            case Api.API_CAT_BRAND:
+
+                System.out.println(xml);
+
+
+                break;
+
+            case Api.API_CATLIST:
+                
+                System.out.println(xml);
+
+
+                break;
+
+
+            case Api.GET_BRAND_INFO:
+                System.out.println(xml);
+                break;
+
+        }
+
+
+
+
+
 
     }
 
     @Override
     public void requestdataFailed() {
+
+
+
+
+
 
     }
 
@@ -189,5 +179,54 @@ NetUtils.requestData(Api.API_CAT_BRAND, null, new onRequestDataFinish() {
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+
+
+                switch (checkedId) {
+                    case R.id.home_tab:
+                        noscrollViewPager.setCurrentItem(0,false);
+
+                        NetUtils.requestData(Api.API_CATLIST, null,this, false);
+
+                        break;
+
+                    case R.id.category_tab:
+                        noscrollViewPager.setCurrentItem(1,false);
+                        NetUtils.requestData(Api.API_CAT_BRAND, null,this, false);
+
+                        break;
+                    case R.id.goods_tab:
+                        noscrollViewPager.setCurrentItem(2,false);
+
+
+                       final HashMap<String ,Object>  map  =new HashMap<>();
+
+
+                        map.put("brandId",2238);
+                        NetUtils.requestData(Api.GET_BRAND_INFO, map,this, false);
+                        break;
+                    case R.id.me_tab:
+                        noscrollViewPager.setCurrentItem(3,false);
+
+                        break;
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

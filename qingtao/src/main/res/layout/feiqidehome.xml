@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!--  标题栏  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+        <!--放置logo的位置-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:src="@mipmap/yy20161127021425" />
+        <!--这个控件没什么用 就是为了让搜索的按钮靠右 -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1" />
+
+        <!--搜索的按钮-->
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/radiobutton_off_background"
+
+            />
+
+
+    </LinearLayout>
+    <!--顶部的指示器 采用的是水平的scrollview  禁止拦截上下滑动的事件-->
+
+
+
+        <!--文字部分 加下划线 scrollview 不能包含一个以上的子类 所以必须包裹一层线性布局  -->
+        <LinearLayout
+            android:id="@+id/tabs_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tab_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:text="限量闪购"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:src="@mipmap/ceshi1"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tab_xianliang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:text="限量闪购"
+                    android:textColor="#000"
+
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/ceshi1"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tab_pintuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:text="爆款拼团"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/ceshi1"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tab_pinpai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:text="品牌直购"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/ceshi1"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+
+                    android:id="@+id/tab_qingtaofanxian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:text="轻淘返现"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/ceshi1"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/ceshi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:text="测试"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@mipmap/ceshi1"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+    <!--<android.support.v7.widget.CardView-->
+    <!--android:id="@+id/card"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:clickable="true"-->
+    <!--android:background="@android:color/transparent"-->
+    <!--android:foreground="?android:attr/selectableItemBackground"-->
+    <!--card_view:cardCornerRadius="18dp"-->
+    <!--card_view:cardElevation="88dp">-->
+
+
+    <!--<ImageView-->
+    <!--android:layout_width="200dp"-->
+    <!--android:layout_height="200dp"-->
+    <!--android:src="@mipmap/ic_launcher"-->
+    <!--/>-->
+    <!--</android.support.v7.widget.CardView>-->
+
+
+    <!--<android.support.v7.widget.CardView-->
+
+    <!--android:id="@+id/card2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:clickable="true"-->
+    <!--android:background="@android:color/transparent"-->
+    <!--android:foreground="?android:attr/selectableItemBackground"-->
+    <!--card_view:cardCornerRadius="18dp"-->
+    <!--card_view:cardElevation="48dp">-->
+
+
+    <!--下半部分 包括的是viewpager和listview -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--同样的道理 这里需要包裹一层布局 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--把轮播图包含进来是为了一起滚动的效果-->
+            <include layout="@layout/home_carousel" />
+
+
+            <!--可以刷新的listview  -->
+            <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/home_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <!--</android.support.v7.widget.CardView>-->
+
+
+    <!--app:cardBackgroundColor这是设置背景颜色
+    app:cardCornerRadius这是设置圆角大小
+    app:cardElevation这是设置z轴的阴影
+    app:cardMaxElevation这是设置z轴的最大高度值
+    app:cardUseCompatPadding是否使用CompatPadding
+    app:cardPreventCornerOverlap是否使用PreventCornerOverlap
+    app:contentPadding 设置内容的padding
+    app:contentPaddingLeft 设置内容的左padding
+    app:contentPaddingTop 设置内容的上padding
+    app:contentPaddingRight 设置内容的右padding
+    app:contentPaddingBottom 设置内容的底padding-->
+
+</LinearLayout>

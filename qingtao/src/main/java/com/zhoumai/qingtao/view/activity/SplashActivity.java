@@ -34,7 +34,7 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.splash);
+        setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         //初始化动画
         initAnimation();
@@ -83,6 +83,19 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
 
     @Override
     public void onAnimationEnd(Animation animation) {
+
+
+        /**
+         * 检查版本是否更新
+         */
+
+
+
+
+
+
+
+
 /*
 动画结束之后 判断用户是否是第一次登陆
  */

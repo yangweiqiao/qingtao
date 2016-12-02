@@ -112,7 +112,7 @@ public class LoginActivity extends BaseActivity {
             map.put("password", strPwd);
             NetUtils.requestData(Api.LOGIN, map, new onRequestDataFinish() {
                 @Override
-                public void requestdataFinish(String json) {
+                public void requestdataFinish(String catalog, String json) {
                     System.out.println(json);
                     Admin admin = JsonUtil.parseJsonToBean(json, Admin.class);
                     if (admin.getCode() < 0) {

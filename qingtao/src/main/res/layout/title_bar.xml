@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_red_normal" >
+
+        android:background="#888" >
 
         <TextView
             android:id="@+id/tv_basepager_title"
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:visibility="gone"
+
             android:background="@drawable/button_red_normal" />
         
         <ImageButton
@@ -37,7 +38,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"
-            android:visibility="gone"
+
             android:background="@drawable/button_red_normal" />
 
     </RelativeLayout>

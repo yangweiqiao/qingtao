@@ -10,8 +10,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-import com.zhoumai.qingtao.view.base.application.MyApp;
 import com.zhoumai.qingtao.utils.T;
+import com.zhoumai.qingtao.view.base.application.MyApp;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,6 +24,8 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+
 
 
 /**
@@ -48,7 +50,7 @@ public class NetUtils {
      * @param isCache  是否需要缓存数据
      */
 
-    public static void requestData(String catalog, HashMap<String, Object> map, onRequestDataFinish listener, Boolean isCache) {
+    public static void requestData(final String catalog, final HashMap<String, Object> map, final onRequestDataFinish listener, Boolean isCache) {
 
         /**
          * 判断是否做缓存
@@ -58,7 +60,7 @@ public class NetUtils {
          /*
          * 创建url缓存地址
          */
-            String cacheFileName = creatCacheFileName(catalog, map);
+            final String cacheFileName = creatCacheFileName(catalog, map);
              /*
          * 判断是否有缓存文件
          */
@@ -76,10 +78,20 @@ public class NetUtils {
                  * 从缓存文件中读取数据
                  */
 
-                getDataFromCache(cacheFile, listener);
+                getDataFromCache(catalog,cacheFile, listener);
             } else {
 
-                getDataFromNet(cacheFileName, catalog, map, listener);
+
+
+                new Thread()
+                {
+                    public void run()
+                    {
+                        //访问网络代码
+                        getDataFromNet(cacheFileName, catalog, map, listener);
+                    }
+                }.start();
+
             }
 
         } else {
@@ -87,7 +99,17 @@ public class NetUtils {
             /**
              * 从网络中请求数据 缓存数据
              */
-            getDataFromNet(null, catalog, map, listener);
+
+            new Thread()
+            {
+                public void run()
+                {
+                    //访问网络代码
+                    getDataFromNet(null, catalog, map, listener);
+                }
+            }.start();
+
+
         }
 
 
@@ -175,7 +197,7 @@ public class NetUtils {
      * @param cacheFile 缓存文件
      * @param listener 获取数据后实现接口然后可以获取数据
      */
-    private static void getDataFromCache(final File cacheFile, final onRequestDataFinish listener) {
+    private static void getDataFromCache(final String catalog, final File cacheFile, final onRequestDataFinish listener) {
 
 
         //读取缓存文件
@@ -216,7 +238,7 @@ public class NetUtils {
 //                String json = result;
 
                 //把数据传递给调用者
-                listener.requestdataFinish(result);
+                listener.requestdataFinish(catalog, result);
             }
 
         }.execute();
@@ -235,33 +257,92 @@ public class NetUtils {
      */
     private static void getDataFromNet(final String cacheFileName, final String catalog, final HashMap map, final onRequestDataFinish listener) {
 
+//这里的方法没有添加
+        OkHttpClient okHttpClient=   new OkHttpClient();
 
-/**获取OKHTTPclient对象*/
-        OkHttpClient okHttpClient = MyApp.getOkHttpClient();
-
-        /*
-        判断请求是post还是get请求
+        /**
+         * 设置链接超时
          */
+        okHttpClient.setConnectTimeout(10, TimeUnit.SECONDS);
+        okHttpClient.setReadTimeout(10, TimeUnit.SECONDS);
 
-        if (null == map) {
-            //get请求
-            Request request = new Request.Builder()
-                    .url(HOSTURL +catalog)
+
+        /**
+         * 判斷請求的方式
+         */
+        if(map==null){
+            final Request request = new Request.Builder()
+                    .url(HOSTURL+catalog)
                     .build();
-
-            okHttpClient.newCall(request).enqueue(new Callback() {
+//new call
+            okHttpClient.newCall(request)
+.enqueue(new Callback()
+            {
                 @Override
-                public void onFailure(Request request, IOException e) {
-                    listener.requestdataFailed( );
+                public void onFailure(Request request, IOException e)
+                {
+
+                    listener.requestdataFinish(catalog,null);
                 }
 
                 @Override
-                public void onResponse(Response response) throws IOException {
-                   String  json = response.body().string();
+                public void onResponse(final Response response) throws IOException
+                {
+                    String string = response.body().string();
+                    listener.requestdataFinish(catalog,string);
+                    /**
+                     * 请求完数据之后 做数据的缓存判断
+                     */
 
-listener.requestdataFinish(json);
+                    if (null != cacheFileName) { //判断需要缓存的文件名字
+                        /**需要缓存 */
+                        cacheData(string, catalog);
+                    }
+
+                }
+            });
 
 
+
+
+
+
+
+        }else{
+
+/**以自己的方式创建请求体**/
+            FormEncodingBuilder builder = new FormEncodingBuilder();
+            Set<String> set = map.keySet();
+
+            for (String key : set) {
+
+                builder.add(key, String.valueOf(map.get(key)));
+                System.out.println("测试服务器的数据:"+key+"values"+map.get(key));
+            }
+
+
+            RequestBody requestBody = builder.build();
+
+
+
+
+            System.out.println(HOSTURL + catalog +"    ===========");
+            Request request = new Request.Builder()
+                    .url(HOSTURL + catalog) //catalog 参数是传入的界面类型
+                    .post(requestBody)
+//                .addHeader("token", "helloworldhelloworldhelloworld") 这里不需要添加请求头
+                    .build();
+
+
+
+
+            try {
+                Response response = okHttpClient.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    String message = response.message();
+                    Response response1 = response.networkResponse();
+                    String json = response.body().string();
+                    listener.requestdataFinish(catalog,json);
                     /**
                      * 请求完数据之后 做数据的缓存判断
                      */
@@ -271,62 +352,26 @@ listener.requestdataFinish(json);
                         cacheData(json, catalog);
                     }
 
+                } else  {
+                    //网络请求失败
+                    T.showToast("没网你就知道幸福远了!");
+                    listener.requestdataFinish(catalog,null);
                 }
-
-
-            });
-
-
-        } else {
-
-/**以自己的方式创建请求体**/
-        FormEncodingBuilder builder = new FormEncodingBuilder();
-        Set<String> set = map.keySet();
-
-        for (String key : set) {
-            builder.add(key,String.valueOf(map.get(key)));
-        }
-
-        RequestBody requestBody = builder.build();
-
-
-        Request request = new Request.Builder()
-                .url(HOSTURL + catalog) //catalog 参数是传入的界面类型
-                .post(requestBody)
-//                .addHeader("token", "helloworldhelloworldhelloworld") 这里不需要添加请求头
-                .build();
-        try {
-            Response response = okHttpClient.newCall(request).execute();
-            if (response.isSuccessful()) {
-                String message = response.message();
-                Response response1 = response.networkResponse();
-                String json = response.body().string();
-                listener.requestdataFinish(json);
-
-
-                /**
-                 * 请求完数据之后 做数据的缓存判断
-                 */
-
-                if (null != cacheFileName) { //判断需要缓存的文件名字
-                    /**需要缓存 */
-                    cacheData(json, catalog);
-                }
-
-            } else {
-                //网络请求失败
-                T.showToast("没网你就知道幸福远了!");
-                listener.requestdataFinish(null);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("联网请求catalog数据发生异常----------" + e);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("联网请求数据发生异常----------" + e);
         }
 
-    }
-    }
 
 
+
+
+
+
+
+
+    }
     /**
      * 缓存数据 参数是 xml字符串
      *
