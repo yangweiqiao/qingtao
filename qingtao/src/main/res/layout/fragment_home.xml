@@ -1,25 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f00"
+    android:background="@mipmap/back1"
+
     android:orientation="vertical">
-<!--首页的指示器控件-->
+
+
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x115"
+        android:layout_marginTop="@dimen/x47"
+        android:background="@android:color/white">
+
+        <ImageView
+
+            android:id="@+id/ib_titlebar_img"
+            android:layout_width="@dimen/x236"
+            android:layout_height="@dimen/x37"
+
+            android:layout_centerInParent="true"
+
+
+            android:background="@mipmap/logo" />
+
+        <ImageView
+
+            android:id="@+id/ib_titlebar_sousuo"
+            android:layout_width="@dimen/x61"
+            android:layout_height="@dimen/x61"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x56"
+
+            android:background="@mipmap/search" />
+    </RelativeLayout>
+    <!--首页的指示器控件-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:background="#ececec" />
+
+    <!--<android.support.design.widget.TabLayout-->
+
+    <!--android:id="@+id/home_indicator"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/x104"-->
+
+    <!--android:background="#fff"-->
+    <!--app:tabBackground="@drawable/tabcolor_tab"-->
+    <!--app:tabIndicatorHeight="0dp"-->
+    <!--app:tabTextAppearance="@style/MyTabLayoutTextAppearanceInverse">-->
+
+
+    <!--</android.support.design.widget.TabLayout>-->
+    <!--app:tabBackground="@drawable/tabcolor_tab"  MyTabLayoutTextAppearanceInverse-->
 
     <com.viewpagerindicator.TabPageIndicator
-
         android:id="@+id/home_indicator"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/x104"
+android:background="#fff"
+
+        >
 
 
     </com.viewpagerindicator.TabPageIndicator>
     <!-- 用来显示几个界面的控件 包括首页 ,爆款 .团购... -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x23"
+        android:background="@mipmap/shadow" />
+
+
     <android.support.v4.view.ViewPager
         android:id="@+id/home_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

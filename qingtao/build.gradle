@@ -5,10 +5,11 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.zhoumai.qingtao"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName '测试版1.0'
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 
@@ -48,9 +49,15 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+
     }
+
+
+
     productFlavors {
     }
 }
@@ -83,10 +90,10 @@ dependencies {
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32'
     //下拉刷新
     compile project(':pullToRefreshLibrary')
-    //viewpager指示器
-    compile 'com.mcxiaoke.viewpagerindicator:library:2.4.1'
+  compile 'com.mcxiaoke.viewpagerindicator:library:2.4.1'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     //适配屏幕
     compile 'com.zhy:autolayout:1.4.5'
     compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'com.jiechic.library:xUtils:2.6.14'
 }

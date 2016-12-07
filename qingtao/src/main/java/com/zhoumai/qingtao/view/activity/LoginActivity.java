@@ -18,7 +18,7 @@ import com.zhoumai.qingtao.contains.Contains;
 import com.zhoumai.qingtao.model.Admin;
 import com.zhoumai.qingtao.utils.ActivityFinishUtils;
 import com.zhoumai.qingtao.utils.SpUtils;
-import com.zhoumai.qingtao.utils.T;
+import com.zhoumai.qingtao.utils.Toastutils;
 import com.zhoumai.qingtao.view.base.application.MyApp;
 
 import java.util.HashMap;
@@ -91,10 +91,10 @@ public class LoginActivity extends BaseActivity {
         final String strPwd = privateActLoginEtPwd.getText().toString().trim();
         //数据正确性判断
         if (strUserInput.isEmpty()) {
-            T.showToast("手机/会员名/邮箱不能为空!");
+            Toastutils.showToast("手机/会员名/邮箱不能为空!");
 
         } else if (strPwd.isEmpty()) {
-            T.showToast("密码不能为空!");
+            Toastutils.showToast("密码不能为空!");
         } else {
             //进行登陆
             //显示加载进度条
@@ -110,37 +110,37 @@ public class LoginActivity extends BaseActivity {
             HashMap<String, Object> map = new HashMap<>();
             map.put("username", strUserInput);
             map.put("password", strPwd);
-            NetUtils.requestData(Api.LOGIN, map, new onRequestDataFinish() {
-                @Override
-                public void requestdataFinish(String catalog, String json) {
-                    System.out.println(json);
-                    Admin admin = JsonUtil.parseJsonToBean(json, Admin.class);
-                    if (admin.getCode() < 0) {
-                        T.showToast(admin.getMessage());
-                    } else {
-                        //保存用户
-                        MyApp.instance.setCurrentUser(admin.getResult());
-                        /**
-                         * 记录当前的登录状态为true
-                         */
-                        onProfileSignIn(strUserInput);//统计用户名
-                        SpUtils.setBoolean(Contains.LOGIN, true);
-/**
- * 跳转到主界面
- */
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
-
-                    }
-
-                }
-
-                @Override
-                public void requestdataFailed() {
-                    T.showToast("登录失败,没网就知道幸福离你远了!");
-                }
-            }, false);
-
+//            NetUtils.requestData(Api.LOGIN, map, new onRequestDataFinish() {
+//                @Override
+//                public void requestdataFinish(String catalog, String json) {
+//                    System.out.println(json);
+//                    Admin admin = JsonUtil.parseJsonToBean(json, Admin.class);
+//                    if (admin.getCode() < 0) {
+//                        Toastutils.showToast(admin.getMessage());
+//                    } else {
+//                        //保存用户
+//                        MyApp.instance.setCurrentUser(admin.getResult());
+//                        /**
+//                         * 记录当前的登录状态为true
+//                         */
+//                        onProfileSignIn(strUserInput);//统计用户名
+//                        SpUtils.setBoolean(Contains.LOGIN, true);
+///**
+// * 跳转到主界面
+// */
+//                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//
+//
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void requestdataFailed() {
+//                    Toastutils.showToast("登录失败,没网就知道幸福离你远了!");
+//                }
+//            },Admin.class, false);
+//
 
         }
 

@@ -3,7 +3,6 @@ package com.zhoumai.qingtao.view.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,13 @@ import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.R;
-import com.zhoumai.qingtao.utils.T;
-import com.zhoumai.qingtao.view.activity.SettingActivity;
+import com.zhoumai.qingtao.utils.Toastutils;
+import com.zhoumai.qingtao.view.activity.BusinessActivity;
+import com.zhoumai.qingtao.view.activity.settings.SettingActivity;
 import com.zhoumai.qingtao.view.adapter.GalleryAdapter;
 import com.zhoumai.qingtao.view.base.application.MyApp;
+import com.zhoumai.qingtao.view.customview.FullyGridLayoutManager;
+import com.zhoumai.qingtao.view.customview.MyRecyclerView;
 import com.zhoumai.qingtao.view.fragment.base.BaseFragemnt;
 
 import java.util.ArrayList;
@@ -49,22 +51,25 @@ public class MeFragment extends BaseFragemnt implements View.OnClickListener {
     /**
      * 浏览记录
      **/
-    RecyclerView Browserecords;
+    MyRecyclerView Browserecords;
     //设置我的界面的数据
     //配置gridView的数据
     /**
      * 我的世界的参数
      **/
     private int[] icon = {
-            R.mipmap.ceshi1, R.mipmap.ceshi1, R.mipmap.ceshi1,
-            R.mipmap.ceshi1, R.mipmap.ceshi1, R.mipmap.ceshi1,
+            R.mipmap.wd_sc_icon, R.mipmap.wd_gwc_icon, R.mipmap.wd_yhq_icon,
+            R.mipmap.wd_qb_icon, R.mipmap.wd_sj_icon, R.mipmap.wd_vip_icon,
     };
     private String[] iconName = {
             "我的收藏", "购物车", "优惠券",
             "我的钱包", "我是商家", "我是会员"
     };
-
-    private String[] icon2Name = {
+    private int[] icon2 = {
+            R.mipmap.wd_xlsg_icon, R.mipmap.wd_bkpt_icon, R.mipmap.wd_ppzg_icon,
+            R.mipmap.wd_qtfxicon
+    };
+    private String[] iconName2 = {
             "全球闪购", "爆款拼团", "品牌直购",
             "轻淘返现"
     };
@@ -94,9 +99,12 @@ public class MeFragment extends BaseFragemnt implements View.OnClickListener {
 
         maybeLovegridView = findView(R.id.maybeLovegridView);
         Browserecords = findView(R.id.id_recyclerview_horizontal);
+
+
         //设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        FullyGridLayoutManager linearLayoutManager = new FullyGridLayoutManager(getContext(),1);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        linearLayoutManager.setSmoothScrollbarEnabled(true);
         Browserecords.setLayoutManager(linearLayoutManager);
 
     }
@@ -136,18 +144,18 @@ public class MeFragment extends BaseFragemnt implements View.OnClickListener {
 
         ArrayList<HashMap<String, Object>> maps2 = new ArrayList<>();
 
-        for (int i = 0; i < icon2Name.length; i++) {
+        for (int i = 0; i < iconName2.length; i++) {
 
             HashMap<String, Object> map = new HashMap<String, Object>();
 
-
-            map.put("ItemText", icon2Name[i]);
+            map.put("ItemImage", icon2[i]);
+            map.put("ItemText", iconName2[i]);
             maps2.add(map);
 
         }
 //创建适配器
-        SimpleAdapter simpleAdapter2 = new SimpleAdapter(MyApp.getContext(), maps2, R.layout.item_gridview2, new String[]{
-                "ItemText"}, new int[]{R.id.item_text2});
+        SimpleAdapter simpleAdapter2 = new SimpleAdapter(MyApp.getContext(), maps2, R.layout.item_gridview, new String[]{
+                "ItemImage", "ItemText"}, new int[]{R.id.item_image, R.id.item_text});
 
         //设置适配器 gridView
         maybeLovegridView.setAdapter(simpleAdapter2);
@@ -169,29 +177,39 @@ public class MeFragment extends BaseFragemnt implements View.OnClickListener {
         // TODO: 2016/12/2
 
         final List<String> strings = new ArrayList<>();
-        strings.add("测试");
-        strings.add("打发打发");
-        strings.add("对对对");
-        strings.add("我的");
-        strings.add("的积分回");
-        strings.add("啊啊");
-        strings.add("急急急");
+        strings.add("88");
+        strings.add("88");
+        strings.add("66");
+        strings.add("55");
+        strings.add("64");
+        strings.add("55");
+        strings.add("99");
+        strings.add("66");
+        strings.add("55");
+        strings.add("64");
+        strings.add("55");
+        strings.add("99");
 
         //设置适配器
         GalleryAdapter mAdapter = new GalleryAdapter(getContext(), strings);
+
+      //  Browserecords.addItemDecoration(new SpaceItemDecoration(5,mAdapter));
+
         Browserecords.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickLitener(new GalleryAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-                T.showToast("条目的点击事件: 位置是=" + position + ",显示的控件内容是:" + strings.get(position));
+                Toastutils.showToast("条目的点击事件: 位置是=" + position + ",显示的控件内容是:" + strings.get(position));
             }
         });
     }
 
 
+
+
     @Override
-    public void requestdataFinish(String catalog, String json) {
+    public void requestdataFinish(String catalog, Object bean) {
 
     }
 
@@ -224,7 +242,7 @@ public class MeFragment extends BaseFragemnt implements View.OnClickListener {
 
             case R.id.frag_personal_settings:
 
-                T.showToast("点击的是设置");
+                Toastutils.showToast("点击的是设置");
 /**
  * 创建意图 控制界面的跳转
  */
@@ -248,19 +266,27 @@ public class MeFragment extends BaseFragemnt implements View.OnClickListener {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             switch (parent.getId()) {
                 case R.id.myWorld_GridView:
+                    switch (position) {
 
-                    T.showToast("点击条目的事件");
+                        case 4:
+                            Intent intent = new Intent(getActivity(), BusinessActivity.class);
+
+
+                            startActivity(intent);
+
+                    }
+
 
                     HashMap<String, Object> itemAtPosition = (HashMap<String, Object>) parent.getItemAtPosition(position);
                     String itemText = (String) itemAtPosition.get("ItemText");
-                    System.out.println("显示的名字是:   " + itemText);
+                    Toastutils.showToast("点击条目的事件,显示的名字是:   " + itemText);
                     break;
 
 
                 case R.id.maybeLovegridView:
                     HashMap<String, Object> itemAtPositions = (HashMap<String, Object>) parent.getItemAtPosition(position);
                     String itemText2 = (String) itemAtPositions.get("ItemText");
-                    System.out.println("显示的名字是:   " + itemText2);
+                    Toastutils.showToast("点击条目的事件,显示的名字是:   " + itemText2);
 
                     break;
             }

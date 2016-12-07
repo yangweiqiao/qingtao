@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+<!--添加搜索框 -->
+
+
+
+
+
+
+
+    <com.zhoumai.qingtao.view.customview.MultipleTextViewGroup
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:overspread="false"
+        app:textBackground="@drawable/btn_normal"
+        app:textColor="#ff0000"
+        app:textLineMargin="10dp"
+        app:textPaddingBottom="10dp"
+        app:textPaddingLeft="10dp"
+        app:textPaddingRight="10dp"
+        app:textPaddingTop="10dp"
+        app:textSize="12sp"
+        app:textWordMargin="10dp" />
+
+
+    <!--app:textBackground="@drawable/btn_normal"-->
+</LinearLayout>

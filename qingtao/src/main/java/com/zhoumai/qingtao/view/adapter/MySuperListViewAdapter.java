@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 
-import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
 
@@ -43,14 +42,13 @@ public abstract class MySuperListViewAdapter extends BaseAdapter {
         if (convertView == null) {
 
             holder =  setHolder();
-            //convertView = View.inflate(parent.getContext(), holder.getItemId(), null);
+             convertView = View.inflate(parent.getContext(), holder.getItemId(), null);
 
             // TODO: 2016/12/2 这里为了避免未知的错误,直接使用的是三个参数的方法  
-            LayoutInflater.from(parent.getContext()).inflate(holder.getItemId(),parent,false);
+           // LayoutInflater.from(parent.getContext()).inflate(holder.getItemId(),parent,false);
 
             convertView.setTag(holder);
-            //添加自动适配 
-            AutoUtils.autoSize(convertView);
+
         } else {
 
             holder = (BaseListViewViewHolder) convertView.getTag();

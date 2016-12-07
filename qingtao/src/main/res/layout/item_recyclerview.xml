@@ -1,29 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
-    android:layout_height="120dp"
-     android:background="#909"
-      >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
 
-    <ImageView
-        android:id="@+id/id_index_gallery_item_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+    android:layout_marginTop="@dimen/x6"
+    android:background="@android:color/transparent">
+    <!--top值是上面的+5-->
+    <android.support.v7.widget.CardView
+
+        android:id="@+id/cardView"
+        android:layout_width="@dimen/x264"
+        android:layout_height="@dimen/x374"
+        android:layout_marginBottom="@dimen/x32"
+        android:layout_marginLeft="@dimen/x13"
+        android:layout_marginRight="@dimen/x11"
+        android:layout_marginTop="@dimen/x65"
+        android:translationZ="@dimen/x20"
+        app:cardCornerRadius="@dimen/x6">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginLeft="@dimen/x32"
+                android:text="¥"
+                android:textColor="#fd4c54"
+                android:textSize="@dimen/x28" />
+
+
+            <!--商品现价-->
+            <TextView
+
+                android:id="@+id/id_index_gallery_item_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x4"
+                android:layout_marginLeft="@dimen/x59"
+                android:text="99"
+                android:textColor="#fd4c54"
+                android:textSize="@dimen/x38" />
+
+            <!-- 商品原价 这里在代码中要记得加一个下划线 -->
+            <TextView
+
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginRight="@dimen/x8"
+                android:text="原价 ¥ 199"
+                android:textColor="#cacaca"
+                android:textSize="@dimen/x26" />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="@dimen/x244"
+        android:layout_height="@dimen/x322"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"
-        android:scaleType="centerCrop" />
+        android:layout_marginLeft="@dimen/x25"
+        android:layout_marginTop="@dimen/x32"
+        android:translationZ="@dimen/x22"
+        app:cardCornerRadius="@dimen/x6">
 
-    <TextView
-        android:id="@+id/id_index_gallery_item_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/id_index_gallery_item_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:textColor="#ff0000"
-        android:text="some info"
-        android:textSize="12dp" />
+
+        <!--商品图片-->
+        <ImageView
+
+            android:id="@+id/id_index_gallery_item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:scaleType="centerCrop"
+            android:src="@mipmap/wd_bkpt_icon" />
+
+    </android.support.v7.widget.CardView>
+
 
 </RelativeLayout>

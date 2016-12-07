@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@mipmap/shangpin_right"
+    >
+<ImageView
+
+    android:id="@+id/sp_imgview"
+    android:layout_width="@dimen/x304"
+    android:layout_height="@dimen/x330"
+android:src="@mipmap/wd_2_icon"
+
+    />
+
+<TextView
+    android:id="@+id/home_sp_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:lines="1"
+    android:textSize="@dimen/x30"
+    android:layout_marginLeft="@dimen/x20"
+    android:layout_marginTop="@dimen/x20"
+    android:text="@string/app_name"
+    />
+
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/x32"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/home_sp_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textSize="@dimen/x38"
+            android:text="¥ 99元"
+            android:textColor="#e31430"
+            />
+        <TextView
+            android:id="@+id/home_sp_oldprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:textSize="@dimen/x30"
+            android:textColor="#c9c9c9"
+            android:text="原价 ¥ 199"
+
+            />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

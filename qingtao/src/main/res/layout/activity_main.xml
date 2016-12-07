@@ -2,50 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical">
  <com.zhoumai.qingtao.view.customview.NoscrollViewPager
      android:id="@+id/noscrollViewPager"
      android:layout_width="match_parent"
      android:layout_height="0dp"
      android:layout_weight="1"
-     ></com.zhoumai.qingtao.view.customview.NoscrollViewPager>
 
+     ></com.zhoumai.qingtao.view.customview.NoscrollViewPager>
 
     <RadioGroup
         android:foreground="?android:attr/selectableItemBackground"
 
         android:id="@+id/home_tab_group"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:orientation="horizontal">
         <!-- 添加图片的时候使用选择器  文字的颜色也要使用选择器 -->
         <RadioButton
             android:id="@+id/home_tab"
             style="@style/bottomStyle"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:background="@drawable/shouye"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="首页" />
+              />
 
         <RadioButton
             android:id="@+id/category_tab"
             style="@style/bottomStyle"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:background="@drawable/fenlei"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="分类" />
+             />
 
         <RadioButton
             android:id="@+id/goods_tab"
             style="@style/bottomStyle"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:background="@drawable/gouwuche"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="订单" />
+              />
 
         <RadioButton
             android:id="@+id/me_tab"
             style="@style/bottomStyle"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:background="@drawable/wode"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="我的" />
+             />
 
 
     </RadioGroup>

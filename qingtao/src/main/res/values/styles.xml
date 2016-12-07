@@ -8,7 +8,14 @@
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/x38</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    <style name="MyTabLayoutTextAppearanceInverse" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">@dimen/x38</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
 
     <!-- 底部选择按钮的style -->
     <style name="bottomStyle">
@@ -45,10 +52,115 @@
     </style>
 
 
-    <style name="Theme.PageIndicatorDefaultss" parent="Theme.AppCompat.NoActionBar">
-        <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator</item>
-        <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
+
+
+    <!--个人中心的我的订单状态的style-->
+    <style name="me_dingdan_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginTop">@dimen/x38</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#333333</item>
+    </style>
+
+    <style name="me_child_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/x136</item>
+        <item name="android:background">#fff</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/x48</item>
+        <item name="android:textColor">#595d75</item>
+        <item name="android:textSize">@dimen/x40</item>
     </style>
 
 
+
+
+
+
+
+
+
+    <!--对话框-->
+    <!--对话框相关的风格抽取 -->
+    <style name="dialog_animation" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+    <!--这里注意问题的出现 -->
+    <style name="dialog_common" parent="@style/AlertDialog.AppCompat.Light">
+        <item name="android:windowBackground">@android:color/white  </item>
+    </style>
+
+    <style name="quick_option_dialog" parent="@style/dialog_common">
+        <item name="android:windowBackground">@color/colorBackground </item>
+        <item name="android:windowAnimationStyle">@style/dialog_animation</item>
+    </style>
+
+    <style name="home_gridview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:cacheColorHint">#f00</item>
+        <!--<item name="android:verticalSpacing">20dp</item>-->
+        <!--<item name="android:horizontalSpacing">20dp</item>-->
+        <item name="android:layout_marginLeft">@dimen/x20</item>
+        <item name="android:numColumns">3</item>
+        <item name="android:listSelector">#00000000</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:fadingEdgeLength">10dip</item>
+    </style>
+    <style name="StyledIndicators" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
+    </style>
+
+    <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
+        <item name="android:background">@drawable/tabcolor_tab</item>
+        <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
+        <item name="android:textSize">@dimen/x38</item>
+        <item name="android:dividerPadding">8dp</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">8dp</item>
+    </style>
+
+    <style name="CustomTabPageIndicator.Text" parent="android:TextAppearance.Medium">
+        <item name="android:typeface">monospace</item>
+        <item name="android:textColor">@drawable/selector_tabtext</item>
+    </style>
+
+
+
+
+
+    <style name="Theme.PageIndicatorDefault" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator1</item>
+        <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator1</item>
+    </style>
+
+    <style name="Widget.IconPageIndicator1" parent="Widget">
+        <item name="android:layout_marginLeft">@dimen/x54</item>
+        <item name="android:layout_marginRight">@dimen/x54</item>
+    </style>
+
+    <style name="Widget.TabPageIndicator1" parent="Widget">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/tab_in</item>
+        <item name="android:paddingLeft">@dimen/x54</item>
+        <item name="android:paddingRight">@dimen/x54</item>
+        <!--<item name="android:paddingTop">12dp</item>-->
+        <!--<item name="android:paddingBottom">12dp</item>-->
+        <item name="android:textAppearance">@style/TextAppearance.TabPageIndicator</item>
+        <item name="android:textSize">@dimen/x38</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="TextAppearance.TabPageIndicator" parent="Widget">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@drawable/tab_text</item>
+    </style>
 </resources>

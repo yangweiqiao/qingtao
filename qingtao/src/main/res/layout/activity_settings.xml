@@ -2,15 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#ececec"
 
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x160"
+        android:layout_marginTop="@dimen/x50"
+        android:background="@android:color/transparent">
 
-    <include layout="@layout/title_bar"
+        <TextView
+            android:id="@+id/tv_basepager_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
 
-        />
+            android:text="设置"
+            android:textColor="#333333"
+            android:textSize="@dimen/x48" />
 
+
+        <ImageView
+            android:id="@+id/ib_titlebar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:clickable="true"
+            android:src="@mipmap/sz_back_icon" />
+
+    </RelativeLayout>
 
     <ScrollView
 
@@ -22,56 +45,64 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x2"
+                android:background="#ececec" />
+            <!--设置中心 头像设置-->
             <LinearLayout
                 android:id="@+id/img_header"
                 android:layout_width="match_parent"
-                android:layout_height="90px"
-                android:background="#999"
+                android:layout_height="@dimen/x210"
+                android:background="#fff"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x50"
                     android:text="头像"
                     android:textColor="#333"
-                    android:textSize="40px" />
+                    android:textSize="@dimen/x43" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher" />
+                <com.zhoumai.qingtao.view.customview.RoundImageView
+                    android:id="@+id/my_touxiang"
+                    android:layout_width="@dimen/x145"
+                    android:layout_height="@dimen/x145"
+                    android:src="@mipmap/sz_tx_icon" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
-
-                    />
+                    android:layout_marginLeft="@dimen/x60"
+                    android:layout_marginRight="@dimen/x56"
+                    android:src="@mipmap/sz_next_icon" />
 
             </LinearLayout>
 
 
             <LinearLayout
+                android:id="@+id/revisename"
                 android:layout_width="match_parent"
-                android:layout_height="90px"
-                android:layout_marginTop="10dp"
-                android:background="#999"
+                android:layout_height="@dimen/x174"
+                android:layout_marginTop="2dp"
+                android:background="#fff"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x50"
                     android:text="昵称"
                     android:textColor="#333"
-                    android:textSize="40px" />
+                    android:textSize="@dimen/x43" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -79,35 +110,41 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/setting_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="昵称" />
+                    android:layout_marginRight="@dimen/x60"
+                    android:text="阡陌"
+                    android:textColor="#888888"
+                    android:textSize="@dimen/x40" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
 
-                    />
+                    android:layout_marginRight="@dimen/x56"
+
+                    android:src="@mipmap/sz_next_icon" />
 
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90px"
-                android:layout_marginTop="10dp"
+                android:layout_height="@dimen/x174"
+                android:layout_marginTop="2dp"
 
-                android:background="#999"
+                android:background="#fff"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x50"
                     android:text="更换手机"
                     android:textColor="#333"
-                    android:textSize="40px" />
+                    android:textSize="@dimen/x43" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -115,36 +152,41 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/setting_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="未设置"
-
-                    />
+                    android:layout_marginRight="@dimen/x60"
+                    android:text="134****2487"
+                    android:textColor="#888888"
+                    android:textSize="@dimen/x40" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
 
-                    />
+                    android:layout_marginRight="@dimen/x56"
+
+                    android:src="@mipmap/sz_next_icon" />
 
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90px"
-                android:layout_marginTop="10dp"
-                android:background="#999"
+                android:layout_height="@dimen/x174"
+                android:layout_marginTop="2dp"
+
+                android:background="#fff"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x50"
                     android:text="我的邮箱"
                     android:textColor="#333"
-                    android:textSize="40px" />
+                    android:textSize="@dimen/x43" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -152,35 +194,44 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/setting_emil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="未设置"
-
-                    />
+                    android:layout_marginRight="@dimen/x60"
+                    android:text="yangweiqiao@126.com"
+                    android:textColor="#888888"
+                    android:textSize="@dimen/x40" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
 
-                    />
+                    android:layout_marginRight="@dimen/x56"
+
+                    android:src="@mipmap/sz_next_icon" />
 
             </LinearLayout>
 
+
             <LinearLayout
+                android:id="@+id/me_adress"
+
+
                 android:layout_width="match_parent"
-                android:layout_height="90px"
-                android:layout_marginTop="10dp"
-                android:background="#999"
+                android:layout_height="@dimen/x174"
+                android:layout_marginTop="2dp"
+
+                android:background="#fff"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="我的地址"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:text="收货地址"
                     android:textColor="#333"
-                    android:textSize="40px" />
+                    android:textSize="@dimen/x43" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -188,29 +239,39 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/text_adress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-
-                    android:text="未设置" />
+                    android:layout_marginRight="@dimen/x60"
+                    android:text="未设置"
+                    android:textColor="#888888"
+                    android:textSize="@dimen/x40" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"
 
-                    />
+                    android:layout_marginRight="@dimen/x56"
+
+                    android:src="@mipmap/sz_next_icon" />
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x28"
+                android:background="#f0f0f0" />
 
 
             <GridView
                 android:id="@+id/setting_gridView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:numColumns="3"
+                android:layout_height="@dimen/x692"
 
-                android:smoothScrollbar="false">
+                android:horizontalSpacing="@dimen/x6"
+                android:numColumns="3"
+                android:smoothScrollbar="false"
+                android:verticalSpacing="@dimen/x3">
 
 
             </GridView>

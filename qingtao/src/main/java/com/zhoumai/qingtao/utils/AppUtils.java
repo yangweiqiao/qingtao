@@ -35,7 +35,7 @@ public class AppUtils
 			return context.getResources().getString(labelRes);
 		} catch (NameNotFoundException e)
 		{
-			e.printStackTrace();
+
 		}
 		return null;
 	}
@@ -53,13 +53,37 @@ public class AppUtils
 			PackageManager packageManager = context.getPackageManager();
 			PackageInfo packageInfo = packageManager.getPackageInfo(
 					context.getPackageName(), 0);
+
 			return packageInfo.versionName;
 
 		} catch (NameNotFoundException e)
 		{
-			e.printStackTrace();
+
 		}
 		return null;
 	}
+	/**
+	 * [获取应用程序版本名称信息]
+	 *
+	 * @param context
+	 * @return 当前应用的版本名称
+	 */
+	public static int getVersionCode(Context context)
+	{
+		try
+		{
+			PackageManager packageManager = context.getPackageManager();
+			PackageInfo packageInfo = packageManager.getPackageInfo(
+					context.getPackageName(), 0);
+
+			return packageInfo.versionCode;
+
+		} catch (NameNotFoundException e)
+		{
+
+		}
+		return 0;
+	}
+
 
 }

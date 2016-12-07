@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/xiangce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x1"
+        android:background="@drawable/first"
+        android:text="相册"
+        android:textColor="#000" />
+
+
+    <Button
+        android:id="@+id/paizhao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x1"
+        android:background="@drawable/middle"
+        android:text="拍照"
+        android:textColor="#000" />
+
+
+    <Button
+        android:id="@+id/cancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/last"
+        android:text="取消"
+        android:textColor="#000" />
+
+</LinearLayout>

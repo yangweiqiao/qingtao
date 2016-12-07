@@ -3,6 +3,7 @@ package com.zhoumai.qingtao.view.fragment;
 import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
+import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.view.fragment.base.BaseFragemnt;
 
 
@@ -13,7 +14,7 @@ import com.zhoumai.qingtao.view.fragment.base.BaseFragemnt;
  * 神兽保佑,代码永无BUG
  */
 
-public class CategoryFragment extends BaseFragemnt    {
+public class CategoryFragment extends BaseFragemnt {
     @Override
     public CharSequence getTitle() {
         return "分类";
@@ -38,13 +39,13 @@ public class CategoryFragment extends BaseFragemnt    {
 
     @Override
     public void initData() {
-stateLayout.showContentView();
+        stateLayout.showContentView();
     }
 
 
 
     @Override
-    public void requestdataFinish(String catalog, String json) {
+    public void requestdataFinish(String catalog, Object bean) {
 
     }
 
@@ -57,6 +58,7 @@ stateLayout.showContentView();
         super.onResume();
         MobclickAgent.onPageStart("CategoryFragment"); //统计页面，"MainScreen"为页面名称，可自定义
     }
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("CategoryFragment");

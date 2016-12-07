@@ -1,13 +1,9 @@
 package com.zhoumai.qingtao.view.fragment.base;
 
-import java.util.Collection;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +11,10 @@ import android.view.ViewGroup;
 
 import com.zhoumai.qingtao.NET.onRequestDataFinish;
 import com.zhoumai.qingtao.R;
-
 import com.zhoumai.qingtao.view.customview.StateLayout;
+
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * Created by 杨伟乔 on 2016/11/23.
@@ -25,7 +23,7 @@ import com.zhoumai.qingtao.view.customview.StateLayout;
  * 神兽保佑,代码永无BUG
  */
 @SuppressWarnings("unused")
-public abstract class  BaseFragemnt extends Fragment  implements onRequestDataFinish {
+public abstract class  BaseFragemnt extends   Fragment  implements onRequestDataFinish   {
      /**上下文**/
     protected Activity context;
     /**加载的布局 自定义的状态布局 里面包含四种加载的状态 成功 失败 空的 内容**/
@@ -53,6 +51,17 @@ public abstract class  BaseFragemnt extends Fragment  implements onRequestDataFi
         //初始化数据
         initData();
         return stateLayout;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+
+
+
     }
 
     /**

@@ -1,63 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<ScrollView
-    android:scrollbars="none"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="vertical"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+
+    <!--<include layout="@layout/tool_bar" />-->
+
+
+    <ScrollView
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.v4.view.ViewPager
-            android:id="@+id/home_home_viewpager"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/home_home_viewpager"
+                android:layout_width="@dimen/x1017"
+
+                android:layout_height="@dimen/x564"
+                android:layout_gravity="center">
+
+
+            </android.support.v4.view.ViewPager>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/x20"
+                android:gravity="center">
+
+                <!-- 灰点的容器 -->
+
+                <LinearLayout
+                    android:id="@+id/home_tab2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" />
+
+                <ImageView
+                    android:id="@+id/iv__bigpoint"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/x20"
+                    android:layout_centerVertical="true"
+
+                    android:background="@drawable/guide_point_big"
+                    android:focusable="true" />
+            </RelativeLayout>
+
+
+            <!--todo 添加界面 -->
+
+            <ImageView
+
+                android:id="@+id/home_img_xl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/zhuanti" />
+
+
+            <com.zhoumai.qingtao.view.customview.Noscollgridview
+                android:id="@+id/home_gridviewxl"
+                style="@style/home_gridview" />
+
+            <ImageView
+
+                android:id="@+id/home_img_bk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:src="@mipmap/zhuanti" />
+
+            <com.zhoumai.qingtao.view.customview.Noscollgridview
+
+                android:id="@+id/home_gridviewbk"
+                style="@style/home_gridview" />
+
+            <ImageView
+                android:id="@+id/home_img_pp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/zhuanti" />
+
+            <com.zhoumai.qingtao.view.customview.Noscollgridview
+                android:id="@+id/home_gridviewpp"
+                style="@style/home_gridview" />
+
+            <ImageView
+                android:id="@+id/home_img_fx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/zhuanti" />
+
+            <com.zhoumai.qingtao.view.customview.Noscollgridview
+                android:id="@+id/home_gridviewfx"
+                style="@style/home_gridview" />
 
 
 
-        </android.support.v4.view.ViewPager>
+            <!--下面是轻淘推荐的商品  -->
+<!--todo 这里缺少轻淘推荐的布局 -->
 
 
-<include layout="@layout/home_item"
-    android:id="@+id/ceshi1"
 
+
+<!--下面是推荐的两个布局 -->
+<RelativeLayout
+    android:id="@+id/tuijian1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/x20"
+    android:layout_marginRight="@dimen/x20"
+android:background="@mipmap/tuijian1"
+    >
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/tuijian1_img"
+        android:layout_marginLeft="@dimen/x56"
+        android:layout_width="@dimen/x500"
+        android:layout_height="@dimen/x500"
+        android:src="@mipmap/back1"/>
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+ android:layout_alignParentRight="true"
+    android:text="@string/app_name"
     />
 
 
-        <include layout="@layout/home_item"
-            android:id="@+id/ceshi1"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-            />
+        android:text="@string/app_name"
+
+        android:layout_marginTop="@dimen/x28"
+        android:textColor="#e31430"
+        android:textSize="@dimen/x56"
+        />
+
+</RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tuijian2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:background="@mipmap/tuijian2"
+                >
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/tuijian1_img2"
+                    android:layout_marginLeft="@dimen/x56"
+                    android:layout_width="@dimen/x500"
+                    android:layout_height="@dimen/x500"
+                    android:src="@mipmap/back1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/app_name"
+                    />
 
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-        <include layout="@layout/home_item"
-            android:id="@+id/ceshi1"
+                    android:text="@string/app_name"
 
-            />
+                    android:layout_marginTop="@dimen/x28"
+                    android:textColor="#e31430"
+                    android:textSize="@dimen/x56"
+                    />
 
+            </RelativeLayout>
 
-
-
-
-        <include layout="@layout/home_item"
-            android:id="@+id/ceshi1"
-
-            />
-
-
+        </LinearLayout>
 
 
-    </LinearLayout>
-
-
-
-
-
-
-</ScrollView>
+    </ScrollView>
 
 </LinearLayout>

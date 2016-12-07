@@ -40,8 +40,10 @@ public class LimitedFragment extends com.zhoumai.qingtao.view.fragment.base.Base
 
     }
 
+
+
     @Override
-    public void requestdataFinish(String catalog, String json) {
+    public void requestdataFinish(String catalog, Object bean) {
 
     }
 

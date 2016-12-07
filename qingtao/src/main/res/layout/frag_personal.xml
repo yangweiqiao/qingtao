@@ -8,7 +8,8 @@
     <!--顶部区域结束-->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
         <!--上部分-->
 
         <LinearLayout
@@ -16,228 +17,216 @@
             android:layout_height="match_parent"
 
             android:orientation="vertical">
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/colorBackground"
-                android:gravity="center"
-
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/frag_personal_tv_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="5"
-                    android:clickable="true"
-
-                    android:textColor="@color/colorFont" />
+                android:layout_height="@dimen/y516"
+                android:background="@mipmap/wo_bg_img">
 
 
+                <!--设置按钮-->
                 <ImageView
                     android:id="@+id/frag_personal_settings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/ic_launcher"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp" />
-                <!--上面这个地方放一个设置的图标-->
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/frag_personal_topbg"
-                android:gravity="center"
-                android:orientation="vertical">
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+android:layout_marginRight="@dimen/x60"
+
+                    android:layout_marginTop="@dimen/x106"
+
+                    android:background="@mipmap/wd_sz_icon_nor" />
+
                 <!--头像显示-->
-                <!--<de.hdodenhof.circleimageview.CircleImageView-->
-                <!--android:id="@+id/frag_personal_iv_head"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--/>-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.zhoumai.qingtao.view.customview.RoundImageView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableTop="@mipmap/yy20161127021425"
-                        android:gravity="center"
-                        android:text="@string/app_name" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableTop="@mipmap/yy20161127021425"
-                        android:gravity="center"
-                        android:text="@string/app_name" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableTop="@mipmap/yy20161127021425"
-                        android:gravity="center"
-                        android:text="@string/app_name" />
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/frag_personal_rl_show_dingdan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/x126"
+                    android:src="@mipmap/wd_tx_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/phone"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/x28"
+                    android:text="阡陌"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/x40" />
+
+                <!--<昵称显示></昵称显示>-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x120"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:background="#30000000"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="积分: 200"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/x34" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="淘粉 : 90"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/x34" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="招兵送码"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/x34" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/frag_personal_rl_show_dingdan"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y125"
+                android:background="#ffffff"
+                android:gravity="center">
+                <!--布局太复杂 需要抽取style-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x48"
                     android:gravity="center"
                     android:text="我的订单"
-                    android:textColor="#bf000000"
-                    android:textSize="15sp" />
+                    android:textColor="#595D75"
+                    android:textSize="@dimen/x40" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/x44"
+                    android:drawableRight="@mipmap/wd_right_icon"
                     android:text="查看全部订单"
-                    android:textColor="#C6C3BF"
-                    android:textSize="15sp" />
+                    android:textColor="#9b9b9b"
+                    android:textSize="@dimen/x34" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/x3"
                 android:background="@color/colorLine" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-
+                android:layout_height="@dimen/y186"
+                android:layout_gravity="center"
+                android:background="#fff"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
+                <TextView
                     android:id="@+id/frag_personal_btn_pay"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorTransparency"
-                    android:drawableTop="@mipmap/ceshi1"
-                    android:gravity="center"
+                    style="@style/me_dingdan_text"
+                    android:drawableTop="@mipmap/wd_1_icon"
                     android:text="待付款" />
 
-                <Button
+
+                <TextView
                     android:id="@+id/frag_personal_btn_daifahuo"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorTransparency"
-                    android:drawableTop="@mipmap/ceshi1"
-                    android:gravity="center"
-                    android:text="待发货" />
+                    style="@style/me_dingdan_text"
+                    android:drawableTop="@mipmap/wd_2_icon"
+                    android:text="未发货" />
 
-                <Button
+
+                <TextView
                     android:id="@+id/frag_personal_btn_daishouhuo"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorTransparency"
-                    android:drawableTop="@mipmap/ceshi1"
+                    style="@style/me_dingdan_text"
+                    android:drawableTop="@mipmap/wd_3_icon"
+                    android:text="等收货" />
 
-                    android:gravity="center"
-                    android:text="待收货" />
 
-                <Button
+                <TextView
                     android:id="@+id/frag_home_personal_daipingjia"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorTransparency"
-                    android:clickable="true"
-                    android:drawableTop="@mipmap/ceshi1"
+                    style="@style/me_dingdan_text"
+                    android:drawableTop="@mipmap/wd_4_icon"
+                    android:text="去评价" />
 
-                    android:text="待评价" />
 
-                <Button
+                <TextView
                     android:id="@+id/frag_personal_btn_tuikuan"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorTransparency"
-                    android:drawableTop="@mipmap/ceshi1"
+                    style="@style/me_dingdan_text"
+                    android:drawableTop="@mipmap/wd_5_icon"
+                    android:text="退换货" />
 
-                    android:gravity="center"
-                    android:text="退款/售后" />
+
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorLine" />
+                android:layout_height="@dimen/x2"
+                android:background="#484848" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x28"
+                android:background="#f0f0f0" />
             <!--下部分控件-->
 
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="我的世界"
-                android:textColor="#bf000000"
-                android:textSize="15sp" />
+
+                style="@style/me_child_title"
+                android:text="我的世界" />
 
 
             <!--分界线-->
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:background="@color/colorLine" />
             <!--中间部分控件-->
             <GridView
                 android:id="@+id/myWorld_GridView"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="@dimen/x640"
                 android:horizontalSpacing="2dp"
                 android:listSelector="@null"
                 android:numColumns="3"
-                android:verticalSpacing="3dp"
+
+                android:verticalSpacing="1dp"
 
                 />
 
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorLine" />
+                android:layout_height="@dimen/x28"
+                android:background="#f0f0f0" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="5dp"
-                android:text="你可能喜欢 "
-                android:textColor="#bf000000"
-                android:textSize="15sp" />
+                style="@style/me_child_title"
+
+                android:text="你可能喜欢" />
 
             <View
                 android:layout_width="match_parent"
@@ -245,30 +234,56 @@
                 android:background="@color/colorLine" />
             <!--底部部分控件-->
 
+
             <GridView
                 android:id="@+id/maybeLovegridView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/x280"
+
+                android:gravity="center"
                 android:horizontalSpacing="2dp"
                 android:listSelector="@null"
                 android:numColumns="4"
-                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp"
 
-                android:verticalSpacing="3dp" />
-
+                />
 
             <!--水平的滑动的控件  类似app下载时候 截图的展示  -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x28"
+                android:background="#f0f0f0" />
 
-            <android.support.v7.widget.RecyclerView
+            <TextView
+                style="@style/me_child_title"
+
+                android:text="浏览足迹" />
+
+
+
+            <com.zhoumai.qingtao.view.customview.MyRecyclerView
                 android:id="@+id/id_recyclerview_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="#ff0"
+                android:layout_height="wrap_content"
+
+
+
+                android:background="#fff"
                 android:scrollbars="none">
 
 
-            </android.support.v7.widget.RecyclerView>
+            </com.zhoumai.qingtao.view.customview.MyRecyclerView>
 
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:background="#fff"-->
+                <!--android:gravity="center"-->
+                <!--android:text="没有了,加载完了"-->
+                <!--android:textColor="#595d75"-->
+                <!--android:textSize="@dimen/x40" />-->
 
         </LinearLayout>
     </ScrollView>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ececec"
+    android:orientation="vertical">
+
+    <!--加载标题栏 -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x160"
+        android:layout_marginTop="@dimen/x50"
+
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/tv_basepager_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+
+            android:text="昵称"
+            android:textColor="#333333"
+            android:textSize="@dimen/x48" />
+
+
+        <ImageView
+            android:id="@+id/ib_titlebar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:clickable="true"
+            android:src="@mipmap/sz_back_icon" />
+
+        <TextView
+android:onClick="onClick"
+            android:id="@+id/ib_titlebar_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x56"
+            android:background="@android:color/transparent"
+            android:textColor="#000"
+            android:text="保存"
+             />
+
+
+    </RelativeLayout>
+    <!--修改昵称-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x174"
+        android:layout_marginTop="@dimen/x28"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/x50"
+            android:text="昵称"
+            android:textColor="#888888"
+            android:textSize="@dimen/x43" />
+
+        <EditText
+            android:id="@+id/revise_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/x102"
+            android:layout_weight="1"
+            android:background="@null"
+            android:cursorVisible="false"
+            android:hint="1-16位"
+            android:textColorHint="#cccccc" />
+
+        <ImageView
+            android:id="@+id/nc_delet"
+            android:layout_width="@dimen/x92"
+            android:layout_height="@dimen/x92"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/x56"
+            android:src="@drawable/nc_delet" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

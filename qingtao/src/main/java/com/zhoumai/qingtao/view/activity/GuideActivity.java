@@ -7,6 +7,8 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,6 +54,14 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_guide);
         ActivityFinishUtils.addActivity(this);
         ButterKnife.bind(this);
+
+        //设置为无标题
+              /*set it to be no title*/
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+       /*set it to be full screen*/
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         btGuideStart.setOnClickListener(this);//监听开始按钮
         initData();
         initAdapter();
@@ -105,8 +115,8 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
 
     private void initData() {
         //创建图片id的数组 
-        int[] imgid = new int[]{R.mipmap.launch_01, R.mipmap.launch_02,
-                R.mipmap.launch_03};
+        int[] imgid = new int[]{R.mipmap.back1, R.mipmap.back1,
+                R.mipmap.back1};
         // 根据图片id的数组创建图片集合
         imgs = new ArrayList<ImageView>();
         /**
@@ -175,7 +185,7 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
 
     public void onResume() {
         super.onResume();
-          MobclickAgent.onResume(this);
+        MobclickAgent.onResume(this);
     }
 
     public void onPause() {

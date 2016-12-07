@@ -26,20 +26,17 @@ import butterknife.BindView;
  */
 public class RefreshListview extends ListView {
 
-    @BindView(R.id.pb_refresh_header_progress)
-    ProgressBar pb_refresh_header_progress;
-    @BindView(R.id.iv_refresh_header_arrow)
-    ImageView iv_refresh_header_arrow;
-    @BindView(R.id.tv_refresh_header_state)
-    TextView tv_refresh_header_state;
-    @BindView(R.id.tv_refresh_header_time)
-    TextView tv_refresh_header_time;
-
 
     private int downY = -1;
     private int headerMeasuredHeight;
     private View header;
 
+    ProgressBar pb_refresh_header_progress;
+    ImageView iv_refresh_header_arrow;
+
+    TextView tv_refresh_header_state;
+
+    TextView tv_refresh_header_time;
 
     /**
      * listview当前的状态
@@ -64,6 +61,8 @@ public class RefreshListview extends ListView {
 
     private void addFooter() {
         footer = View.inflate(getContext(), R.layout.refresh_footer, null);
+
+
         // 测量脚布局
         footer.measure(0, 0);
         footerMeasuredHeight = footer.getMeasuredHeight();
@@ -90,6 +89,15 @@ public class RefreshListview extends ListView {
 
     private void addHeader() {
         header = View.inflate(getContext(), R.layout.refresh_header, null);
+
+        pb_refresh_header_progress = (ProgressBar) header.findViewById(R.id.pb_refresh_header_progress);
+
+        iv_refresh_header_arrow = (ImageView) header.findViewById(R.id.iv_refresh_header_arrow);
+
+        tv_refresh_header_state = (TextView) header.findViewById(R.id.tv_refresh_header_state);
+
+        tv_refresh_header_time = (TextView) header.findViewById(R.id.tv_refresh_header_time);
+
         // 隐藏头布局
         header.measure(0, 0);
         headerMeasuredHeight = header.getMeasuredHeight();

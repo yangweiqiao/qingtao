@@ -6,9 +6,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhoumai.qingtao.R;
+import com.zhoumai.qingtao.utils.Toastutils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ${杨伟乔} on 2016/11/27.
@@ -39,17 +40,35 @@ public class CarouselViewpagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         // 把对应位置的图片添加到ViewPager中
         position=position%imgurls.size();
+
         //创建图片控件
         ImageView view = new ImageView(container.getContext());
+
+        view.setBackgroundResource(R.drawable.retangle);
         //设置缩放模式
+        view.setAdjustViewBounds(true);
+
+
+
         view.setScaleType(ImageView.ScaleType.FIT_XY);
         //添加到容器中
         container.addView(view);
+
         //设置图片的内容
         ImageLoader.getInstance().displayImage( imgurls.get(position),view); //参数url地址和view控件
 
-        //ImageView imageView = imgurls.get(position%imgurls.size());
-        // container.addView(imageView);
+
+        final int finalPosition = position;
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //点击跳转到详情的界面
+                Toastutils.showToast("点击事件的发 生 "+ finalPosition);
+
+            }
+        });
+
+
         return view;
     }
 

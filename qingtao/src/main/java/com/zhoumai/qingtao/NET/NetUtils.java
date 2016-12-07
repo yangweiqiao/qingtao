@@ -10,7 +10,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-import com.zhoumai.qingtao.utils.T;
+import com.zhoumai.qingtao.utils.L;
+import com.zhoumai.qingtao.utils.Toastutils;
 import com.zhoumai.qingtao.view.base.application.MyApp;
 
 import java.io.BufferedReader;
@@ -26,8 +27,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 
-
-
 /**
  * 请求数据
  *
@@ -38,6 +37,7 @@ public class NetUtils {
 
 
     private static final String HOSTURL = "http://139.224.222.130:8882/";
+    private static Class<?> cls;
 
     /**
      * 请求数据示例:
@@ -50,8 +50,8 @@ public class NetUtils {
      * @param isCache  是否需要缓存数据
      */
 
-    public static void requestData(final String catalog, final HashMap<String, Object> map, final onRequestDataFinish listener, Boolean isCache) {
-
+    public static void requestData(final String catalog, final HashMap<String, Object> map, final onRequestDataFinish listener, Class<?> clss, Boolean isCache) {
+        cls = clss;
         /**
          * 判断是否做缓存
          * */
@@ -78,15 +78,12 @@ public class NetUtils {
                  * 从缓存文件中读取数据
                  */
 
-                getDataFromCache(catalog,cacheFile, listener);
+                getDataFromCache(catalog, cacheFile, listener);
             } else {
 
 
-
-                new Thread()
-                {
-                    public void run()
-                    {
+                new Thread() {
+                    public void run() {
                         //访问网络代码
                         getDataFromNet(cacheFileName, catalog, map, listener);
                     }
@@ -100,10 +97,8 @@ public class NetUtils {
              * 从网络中请求数据 缓存数据
              */
 
-            new Thread()
-            {
-                public void run()
-                {
+            new Thread() {
+                public void run() {
                     //访问网络代码
                     getDataFromNet(null, catalog, map, listener);
                 }
@@ -125,15 +120,20 @@ public class NetUtils {
     private static String creatCacheFileName(String catalog, HashMap values) {
 
         /**根据传入进来的参数创建缓存文件名字*/
-        return catalog + values.toString();
+        if (values == null) {
+
+            return catalog;
+        } else {
+            return catalog + values.toString();
+        }
+
     }
 
     /**
      * 获取缓存文件
      *
-     * @param   cacheFileName  根据文件名字去获取文件
+     * @param cacheFileName 根据文件名字去获取文件
      * @return file
-     *
      */
     private static File getCacheFile(String cacheFileName) {
 
@@ -141,8 +141,7 @@ public class NetUtils {
             // 进行编码
             cacheFileName = URLEncoder.encode(cacheFileName, "utf-8");
 
-            return    new File(MyApp.getContext().getCacheDir(), cacheFileName);
-
+            return new File(MyApp.getContext().getCacheDir(), cacheFileName);
 
 
         } catch (Exception e) {
@@ -163,17 +162,17 @@ public class NetUtils {
 
         //判断缓存文件是否有效,
 
-        /*
-        1.首先判断文件是否为null 或者是不存在的
+        /**
+         1.首先判断文件是否为null 或者是不存在的
          */
         if (cacheFile == null || !cacheFile.exists()) {
             //条件满足一个 就返回false
 
             return false; //文件不存在
         }
-        /*
+        /**
          2. 判断文件存在的情况
-		 */
+         */
         //定义文件的有效
         /*
          TODO  这里定义的是缓存文件的有效时间
@@ -195,18 +194,18 @@ public class NetUtils {
      * 从缓存文件中获取数据
      *
      * @param cacheFile 缓存文件
-     * @param listener 获取数据后实现接口然后可以获取数据
+     * @param listener  获取数据后实现接口然后可以获取数据
      */
     private static void getDataFromCache(final String catalog, final File cacheFile, final onRequestDataFinish listener) {
 
 
         //读取缓存文件
         new AsyncTask<Void, Void, String>() {
-
+            /**在子线程操作的方法**/
             @Override
             protected String doInBackground(Void... params) {
-                BufferedReader reader    ;
-
+                BufferedReader reader;
+//读取文件的方法  不解释
                 try {
                     reader = new BufferedReader(new FileReader(cacheFile));
 
@@ -231,14 +230,18 @@ public class NetUtils {
                 return null;
             }
 
+            /**
+             * 执行的结果  通过这个方法获取上面的方法执行的结果
+             * @param result
+             */
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
                 //这里的参数是上面的那个方法返回的数据
-//                String json = result;
-
+//
+                Object bean = JsonUtil.parseJsonToBean(result, cls);
                 //把数据传递给调用者
-                listener.requestdataFinish(catalog, result);
+                listener.requestdataFinish(catalog, bean);
             }
 
         }.execute();
@@ -249,133 +252,95 @@ public class NetUtils {
     /**
      * 从网络获取数据
      *
-     *
-     * @param cacheFileName  缓存文件名称
-     * @param catalog  地址接口
-     * @param map  参数
-     * @param listener  监听接口
+     * @param cacheFileName 缓存文件名称
+     * @param catalog       地址接口
+     * @param map           参数
+     * @param listener      监听接口
      */
     private static void getDataFromNet(final String cacheFileName, final String catalog, final HashMap map, final onRequestDataFinish listener) {
 
 //这里的方法没有添加
-        OkHttpClient okHttpClient=   new OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient();
 
         /**
          * 设置链接超时
          */
         okHttpClient.setConnectTimeout(10, TimeUnit.SECONDS);
         okHttpClient.setReadTimeout(10, TimeUnit.SECONDS);
-
+        Request request = null;
 
         /**
          * 判斷請求的方式
          */
-        if(map==null){
-            final Request request = new Request.Builder()
-                    .url(HOSTURL+catalog)
+        if (map == null) {
+            //get请求
+            request = new Request.Builder()
+                    .url(HOSTURL + catalog)
                     .build();
-//new call
-            okHttpClient.newCall(request)
-.enqueue(new Callback()
-            {
-                @Override
-                public void onFailure(Request request, IOException e)
-                {
 
-                    listener.requestdataFinish(catalog,null);
-                }
-
-                @Override
-                public void onResponse(final Response response) throws IOException
-                {
-                    String string = response.body().string();
-                    listener.requestdataFinish(catalog,string);
-                    /**
-                     * 请求完数据之后 做数据的缓存判断
-                     */
-
-                    if (null != cacheFileName) { //判断需要缓存的文件名字
-                        /**需要缓存 */
-                        cacheData(string, catalog);
-                    }
-
-                }
-            });
-
-
-
-
-
-
-
-        }else{
-
-/**以自己的方式创建请求体**/
+        } else {
+//post请求
+            /**以自己的方式创建请求体**/
             FormEncodingBuilder builder = new FormEncodingBuilder();
             Set<String> set = map.keySet();
-
+/**遍历集合 添加请求体 **/
             for (String key : set) {
 
                 builder.add(key, String.valueOf(map.get(key)));
-                System.out.println("测试服务器的数据:"+key+"values"+map.get(key));
+                L.e("测试服务器的数据:" + key + "values" + map.get(key));
             }
 
 
+            //创建请求体
             RequestBody requestBody = builder.build();
-
-
-
-
-            System.out.println(HOSTURL + catalog +"    ===========");
-            Request request = new Request.Builder()
+            request = new Request.Builder()
                     .url(HOSTURL + catalog) //catalog 参数是传入的界面类型
                     .post(requestBody)
 //                .addHeader("token", "helloworldhelloworldhelloworld") 这里不需要添加请求头
                     .build();
 
-
-
-
-            try {
-                Response response = okHttpClient.newCall(request).execute();
-                if (response.isSuccessful()) {
-                    String message = response.message();
-                    Response response1 = response.networkResponse();
-                    String json = response.body().string();
-                    listener.requestdataFinish(catalog,json);
-                    /**
-                     * 请求完数据之后 做数据的缓存判断
-                     */
-
-                    if (null != cacheFileName) { //判断需要缓存的文件名字
-                        /**需要缓存 */
-                        cacheData(json, catalog);
-                    }
-
-                } else  {
-                    //网络请求失败
-                    T.showToast("没网你就知道幸福远了!");
-                    listener.requestdataFinish(catalog,null);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("联网请求catalog数据发生异常----------" + e);
-            }
         }
 
+        okHttpClient.newCall(request)
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Request request, IOException e) {
+                        listener.requestdataFailed();
+
+                    }
+
+                    @Override
+                    public void onResponse(final Response response) throws IOException {
+                        String string = response.body().string();
+                        System.out.println("数据:::::::" + string);
 
 
+                        /**
+                         * 解析数据
+                         */
 
+                        Object bean = JsonUtil.parseJsonToBean(string, cls);
+                        listener.requestdataFinish(catalog, bean);
 
+                        /**
+                         * 请求完数据之后 做数据的缓存判断
+                         */
 
+                        if (null != cacheFileName) { //判断需要缓存的文件名字
+                            /**需要缓存 */
+                            cacheData(string, catalog);
+                        }
 
-
+                    }
+                });
 
     }
+
+
     /**
      * 缓存数据 参数是 xml字符串
      *
-     * @param result json数据缓存
+     * @param result   json数据缓存
      * @param fileName 文件名称
      */
     private static void cacheData(String result, String fileName) {
@@ -384,13 +349,15 @@ public class NetUtils {
             return;
         }
 
-        //根据url获取
+        //根据文件名获取
         File cacheFile = getCacheFile(fileName);
         BufferedWriter writer = null;
         try {
+
+            //写入缓存
             writer = new BufferedWriter(new FileWriter(cacheFile));
             writer.write(result);
-            writer.flush();
+            writer.flush(); //刷新进去数据
 
         } catch (IOException e) {
             e.printStackTrace();

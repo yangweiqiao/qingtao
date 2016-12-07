@@ -2,6 +2,7 @@ package com.zhoumai.qingtao.view.base.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Color;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -9,12 +10,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.model.Admin;
 import com.zhoumai.qingtao.utils.NetUtils;
-
-
 
 
 /**
@@ -38,7 +38,7 @@ public class MyApp extends Application {
      **/
     //根据网络的连接状态指定缓存的有效时间
 
-    public static long cacheFileExpiryDate;
+    public static long cacheFileExpiryDate = 1000 * 60 * 10;
 
     /**
      * 获取缓存的有效时间 在读取缓存文件的时候调用这个方法 判断缓存文件是否有效
@@ -81,8 +81,8 @@ public class MyApp extends Application {
         super.onCreate();
         TAG = this.getClass().getSimpleName();
         //// TODO: 2016/11/27 初始化sdk  初始化第一个参数传当前activity的context对象，第二个参数传ShareSDK的appkey，第二个参数可以省略不传，因为sharesdk.xml已经配置，默认会访问的；
-       // 初始化的代码尽量放到调用分享的activity的入口oncreat下就好，尽量不要再application里初始化，也可以多次调用初始化ShareSDK，
-       // 初始化ShareSDK必须放到所有调用ShareSDK的最前端。
+        // 初始化的代码尽量放到调用分享的activity的入口oncreat下就好，尽量不要再application里初始化，也可以多次调用初始化ShareSDK，
+        // 初始化ShareSDK必须放到所有调用ShareSDK的最前端。
 //        ShareSDK.initSDK(this, "sharesdk的appkey");
 
         //由于Application类本身已经单例，所以直接按以下处理即可。
@@ -101,6 +101,7 @@ public class MyApp extends Application {
 
         }
 
+
     }
 
     /**
@@ -109,9 +110,9 @@ public class MyApp extends Application {
     public static void initImageLoader(Context context) {
         // 显示相关的配置
         DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.mipmap.launch_01)        // 图片正在下载的过程中显示的图片
-                .showImageForEmptyUri(R.mipmap.launch_01)    // 如果下载地址是空的显示的默认图片
-                .showImageOnFail(R.mipmap.launch_01)            // 下载失败了显示的默认图片
+                .showImageOnLoading(R.mipmap.back1)        // 图片正在下载的过程中显示的图片
+                .showImageForEmptyUri(R.mipmap.back1)    // 如果下载地址是空的显示的默认图片
+                .showImageOnFail(R.mipmap.back1)            // 下载失败了显示的默认图片
                 .cacheInMemory(true)        // 缓存在内容中
                 .cacheOnDisk(true)            // 缓存到SD卡
                 .considerExifParams(true)    // 参考Exif参数
