@@ -57,6 +57,7 @@ public class SettingActivity extends BaseActivity {
     private static final int MY_PERMISSIONS_REQUEST_PHOTO = 999;
     private static final int ADDADDRESS = 1001;  //请求添加地址的界面的请求码
     private static final int SEETINGNAME = 1002;
+    private static final int REVISE_EMIL = 1004;
     @BindView(R.id.img_header)
     LinearLayout privateImgHeader;
     @BindView(R.id.setting_gridView)
@@ -67,6 +68,10 @@ public class SettingActivity extends BaseActivity {
     TextView privateSettingName;
     @BindView(R.id.revisename)
     LinearLayout privateRevisename;
+
+
+    @BindView(R.id.revisephone)
+    LinearLayout revisephone;
     @BindView(R.id.setting_phone)
     TextView privateSettingPhone;
     @BindView(R.id.setting_emil)
@@ -75,6 +80,10 @@ public class SettingActivity extends BaseActivity {
     TextView privateTextAdress;
     @BindView(R.id.me_adress)
     LinearLayout privateMeAdress;
+    @BindView(R.id.me_emil)
+    LinearLayout privateMeEmil;
+
+
     private CheckHeader dialog;
     private int[] icon = {
             R.mipmap.sz_1_icon, R.mipmap.sz_2_icon, R.mipmap.sz_3_icon,
@@ -202,15 +211,13 @@ public class SettingActivity extends BaseActivity {
                             break;
                         case 4:
                             Toastutils.showToast("点击绑定账户");
+
+
+
                             break;
                         case 5:
                             Toastutils.showToast("点击实名认证");
-//                            测试读取手机联系人信息
-                            List<Contact> queryContacts = QueryContactUtils.queryContact(getApplicationContext());
-                            for (Contact contact : queryContacts) {
-                                System.out.println("contact:"+contact);
-                            }
-
+//
                             break;
 
                     }
@@ -218,7 +225,7 @@ public class SettingActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.img_header, R.id.me_adress, R.id.revisename})
+    @OnClick({R.id.img_header, R.id.me_adress, R.id.revisename, R.id.revisephone,R.id.me_emil})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_header:
@@ -241,16 +248,36 @@ public class SettingActivity extends BaseActivity {
                 paizhao.setOnClickListener(new buttonClick());
                 cancel.setOnClickListener(new buttonClick());
                 break;
-            //点击我的地址 弹出一个新的界面设置地址
-            case R.id.me_adress:
-                startActivityForResult(new Intent(SettingActivity.this, AddAddressActivity.class), ADDADDRESS);
-                break;
-//点击修改昵称
+
+            //点击修改昵称
             case R.id.revisename:
                 //需要把自己现在的昵称带着过去默认显示
                 Intent intent = new Intent(SettingActivity.this, ReviseNameActivity.class);
                 intent.putExtra("name", privateSettingName.getText().toString());
                 startActivityForResult(intent, SEETINGNAME);
+                break;
+
+
+            //设置手机号码
+            case R.id.revisephone:
+
+
+
+
+                break;
+
+
+            //设置邮箱
+            case R.id.me_emil:
+
+
+                startActivityForResult(new Intent(SettingActivity.this,EmilActivity.class), REVISE_EMIL);
+                break;
+
+
+            //点击我的地址 弹出一个新的界面设置地址  收货地址
+            case R.id.me_adress:
+                startActivityForResult(new Intent(SettingActivity.this, AddAddressActivity.class), ADDADDRESS);
                 break;
 
 

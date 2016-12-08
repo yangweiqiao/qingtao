@@ -44,7 +44,7 @@ public class CarouselViewpagerAdapter extends PagerAdapter {
         //创建图片控件
         ImageView view = new ImageView(container.getContext());
 
-        view.setBackgroundResource(R.drawable.retangle);
+       // view.setBackgroundResource(R.drawable.retangle);
         //设置缩放模式
         view.setAdjustViewBounds(true);
 

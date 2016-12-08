@@ -1,12 +1,16 @@
 package com.zhoumai.qingtao.view.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.view.fragment.TabFragmentAdapter;
@@ -32,49 +36,60 @@ import butterknife.ButterKnife;
 
 public class BusinessActivity extends AppCompatActivity {
 
-    @BindView(R.id.tablayot)
-    TabLayout privateTablayot;
-    @BindView(R.id.viewpager_business)
-    ViewPager privateViewpagerBusiness;
-    private ArrayList<BaseFragemnt> fragments;
+//    @BindView(R.id.tablayot)
+//    TabLayout privateTablayot;
+//    @BindView(R.id.viewpager_business)
+//    ViewPager privateViewpagerBusiness;
+//    private ArrayList<BaseFragemnt> fragments;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.coordinetorlayout);
-        ButterKnife.bind(this);
-        initData();
-        privateViewpagerBusiness.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return fragments.get(position);
-            }
 
-            @Override
-            public int getCount() {
-                return fragments.size();
-            }
 
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return fragments.get(position).getTitle();
-            }
-        });
-        privateTablayot.setupWithViewPager(privateViewpagerBusiness);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//设置商家的名称
+        toolbar.setTitle("商家");
+        toolbar.setTitleTextColor(Color.BLACK);
+        setSupportActionBar(toolbar);
+
+//        ButterKnife.bind(this);
+//        initData();
+
+//
+//
+//        privateViewpagerBusiness.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+//            @Override
+//            public Fragment getItem(int position) {
+//                return fragments.get(position);
+//            }
+//
+//            @Override
+//            public int getCount() {
+//                return fragments.size();
+//            }
+//
+//            @Override
+//            public CharSequence getPageTitle(int position) {
+//                return fragments.get(position).getTitle();
+//            }
+//        });
+//        privateTablayot.setupWithViewPager(privateViewpagerBusiness);
 
     }
 
 
     public void initData() {
-//创建子界面集合
-        fragments = new ArrayList<>();
-//添加子界面到集合中
-        fragments.add(new HomeHomeFragment());
-        fragments.add(new LimitedFragment());
-        fragments.add(new SpeelGroupFragment());
-        fragments.add(new BrandFragment());
-        fragments.add(new CashBackFragment());
+////创建子界面集合
+//        fragments = new ArrayList<>();
+////添加子界面到集合中
+//        fragments.add(new HomeHomeFragment());
+//        fragments.add(new LimitedFragment());
+//        fragments.add(new SpeelGroupFragment());
+//        fragments.add(new BrandFragment());
+//        fragments.add(new CashBackFragment());
 
 
     }

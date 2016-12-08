@@ -130,6 +130,8 @@
 
 
             <LinearLayout
+                android:id="@+id/revisephone"
+
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x174"
                 android:layout_marginTop="2dp"
@@ -172,6 +174,8 @@
 
 
             <LinearLayout
+                android:id="@+id/me_emil"
+
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x174"
                 android:layout_marginTop="2dp"
@@ -215,12 +219,9 @@
 
             <LinearLayout
                 android:id="@+id/me_adress"
-
-
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x174"
                 android:layout_marginTop="2dp"
-
                 android:background="#fff"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">

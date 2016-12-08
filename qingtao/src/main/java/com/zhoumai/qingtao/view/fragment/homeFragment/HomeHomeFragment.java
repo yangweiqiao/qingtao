@@ -2,10 +2,12 @@ package com.zhoumai.qingtao.view.fragment.homeFragment;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.CursorAdapter;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,7 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ToxicBakery.viewpager.transforms.BackgroundToForegroundTransformer;
 import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
+import com.ToxicBakery.viewpager.transforms.ScaleInOutTransformer;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 import com.zhoumai.qingtao.NET.JsonUtil;
@@ -23,6 +27,7 @@ import com.zhoumai.qingtao.NET.NetUtils;
 import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.ceshi;
 import com.zhoumai.qingtao.utils.DensityUtils;
+import com.zhoumai.qingtao.view.TimerUtils.TimerUtils;
 import com.zhoumai.qingtao.view.adapter.BaseListViewViewHolder;
 import com.zhoumai.qingtao.view.adapter.CarouselViewpagerAdapter;
 import com.zhoumai.qingtao.view.adapter.HomeGridViewAdapter;
@@ -32,7 +37,10 @@ import com.zhoumai.qingtao.view.customview.Noscollgridview;
 import com.zhoumai.qingtao.view.customview.NoscrollListview;
 import com.zhoumai.qingtao.view.fragment.base.BaseFragemnt;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -69,6 +77,7 @@ public class HomeHomeFragment extends BaseFragemnt {
     private Noscollgridview homeGridviewbk;
     private Noscollgridview homeGridviewpp;
     private Noscollgridview homeGridviewfx;
+    private RelativeLayout parent;
 
 
     @Override
@@ -107,16 +116,90 @@ public class HomeHomeFragment extends BaseFragemnt {
         homeViewpager = findView(R.id.home_home_viewpager);
 //1.设置viewpager页面之间的间距
         homeViewpager.setPageMargin((int) getResources().getDimensionPixelOffset(R.dimen.x20));//设置viewpager每个页卡的间距，与gallery的spacing属性类似
-        homeViewpager.setPageTransformer(true, new DepthPageTransformer());
+        homeViewpager.setPageTransformer(true, new ScaleInOutTransformer());
         /**2.轮播图的指示器**/
         homeTab2 = findView(R.id.home_tab2);
         /**3.轮播图的指示器上面滑动的那个大的点**/
         bigpoint = findView(R.id.iv__bigpoint);
+
+
+        /**
+         * 添加倒计时的父容器
+         */
+
+
+        parent = findView(R.id.parent);
     }
 
 
     @Override
     public void initData() {
+
+        /**
+         * 设置倒计时
+         */
+/**
+ * 获取到商品的时间开始倒计时
+ */
+
+        //转换时间到毫秒值
+       // 2016-12-08 14:00:00
+String time ="2016-12-09 21:22:00";
+        String[] split = time.split("[^\\d]");
+
+        StringBuffer sb = new StringBuffer();
+        for(int i = 0; i < split.length; i++){
+            sb. append(split[i]);
+        }
+
+        String newStr = sb.toString();
+
+
+        System.out.println("时间1"+newStr);
+
+        Calendar c = Calendar.getInstance();
+
+        try {
+            c.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(newStr));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        System.out.println("时间转化后的毫秒数为："+c.getTimeInMillis());
+
+
+
+        //获取系统当前的毫秒值
+        long currentTimeMillis = System.currentTimeMillis();
+        System.out.println("时间转化后的毫秒数为问我："+currentTimeMillis);
+        //计算毫秒值差
+
+        TextView tv= TimerUtils.getTimer(TimerUtils.JD_STYLE,getActivity(),c.getTimeInMillis()-currentTimeMillis, TimerUtils.TIME_STYLE_ONE,R.drawable.shape_timer)
+                .setTimerPadding(20,20,30,30)//设置内间距
+                .setTimerTextColor(Color.WHITE)//设置字体颜色
+                .setTimerTextSize(65)//设置字体大小
+                .setTimerGapColor(Color.RED)//设置间隔的颜色
+                .getmDateTv();//拿到TextView对象
+        parent.addView(tv);
+
+        tv.setGravity(Gravity.CENTER);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) tv.getLayoutParams();
+        params.setMargins(30,30,30,30);
+        params.leftMargin=610;
+        params.topMargin=235;
+
+        tv.setLayoutParams(params);
+
+
+
+
+
+
+
+
 //        根据网络的请求结果设置数据?
         /**1.请求轮播图的数据**/
         list = new ArrayList<>();

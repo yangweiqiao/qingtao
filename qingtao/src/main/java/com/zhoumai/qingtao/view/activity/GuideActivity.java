@@ -51,16 +51,19 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //设置为无标题
+              /*set it to be no title*/
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//       /*set it to be full screen*/
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         setContentView(R.layout.activity_guide);
         ActivityFinishUtils.addActivity(this);
         ButterKnife.bind(this);
 
-        //设置为无标题
-              /*set it to be no title*/
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-       /*set it to be full screen*/
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         btGuideStart.setOnClickListener(this);//监听开始按钮
         initData();

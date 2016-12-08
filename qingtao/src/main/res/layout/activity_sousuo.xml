@@ -2,33 +2,101 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ececec"
     android:orientation="vertical">
 
-<!--添加搜索框 -->
+    <!--添加搜索框 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x144"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/x50"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x56"
+            android:src="@mipmap/sz_back_icon" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:layout_weight="1"
+            android:cursorVisible="false"
+            android:lines="@null"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x56"
+            android:text="搜索" />
 
 
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:id="@+id/del_ser"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x56"
+            android:gravity="center_vertical"
+            android:text="历史搜索" />
+
+        <ImageView
+            android:id="@+id/img_del_del"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x60"
+            android:layout_marginRight="@dimen/x56"
+            android:src="@mipmap/sz_3_icon"
+android:layout_alignParentRight="true"
+            />
 
 
+    </RelativeLayout>
 
 
-
-    <com.zhoumai.qingtao.view.customview.MultipleTextViewGroup
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.zhoumai.qingtao.view.customview.MultipleTextViewGroup xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_rl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         app:overspread="false"
         app:textBackground="@drawable/btn_normal"
         app:textColor="#ff0000"
         app:textLineMargin="10dp"
-        app:textPaddingBottom="10dp"
+        app:textPaddingBottom="3dp"
         app:textPaddingLeft="10dp"
         app:textPaddingRight="10dp"
-        app:textPaddingTop="10dp"
-        app:textSize="12sp"
-        app:textWordMargin="10dp" />
+        app:textPaddingTop="3dp"
+        app:textSize="16sp"
+        app:textWordMargin="5dp" />
+
+
+        <TextView
+            android:layout_marginTop="@dimen/x56"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x56"
+            android:gravity="center_vertical"
+            android:text="历史搜索" />
+
+
+
 
 
     <!--app:textBackground="@drawable/btn_normal"-->

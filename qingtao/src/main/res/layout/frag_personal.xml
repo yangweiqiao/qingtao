@@ -20,7 +20,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y516"
+                android:layout_height="@dimen/y620"
                 android:background="@mipmap/wo_bg_img">
 
 

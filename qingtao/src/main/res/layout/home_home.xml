@@ -20,15 +20,26 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/home_home_viewpager"
-                android:layout_width="@dimen/x1017"
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:background="@android:color/transparent"
+                android:translationZ="20dp">
 
-                android:layout_height="@dimen/x564"
-                android:layout_gravity="center">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/home_home_viewpager"
+                    android:layout_width="@dimen/x1017"
+
+                    android:layout_height="@dimen/x564"
+                    android:layout_gravity="center">
 
 
-            </android.support.v4.view.ViewPager>
+                </android.support.v4.view.ViewPager>
+
+
+            </android.support.v7.widget.CardView>
 
 
             <RelativeLayout
@@ -63,13 +74,56 @@
 
 
             <!--todo 添加界面 -->
+<RelativeLayout
 
-            <ImageView
+    android:id="@+id/parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
 
-                android:id="@+id/home_img_xl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/zhuanti" />
+        android:id="@+id/home_img_xl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/shangou" />
+
+<!--<TextView-->
+    <!--android:textStyle="bold"-->
+    <!--android:layout_width="@dimen/x110"-->
+    <!--android:layout_height="@dimen/x110"-->
+    <!--android:layout_marginLeft="@dimen/x602"-->
+    <!--android:layout_marginTop="@dimen/x134"-->
+    <!--android:text="00"-->
+    <!--android:gravity="center"-->
+    <!--android:textSize="@dimen/x63"-->
+    <!--android:textColor="#fff"-->
+    <!--/>-->
+    <!--<TextView-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_width="@dimen/x110"-->
+        <!--android:layout_height="@dimen/x110"-->
+        <!--android:layout_marginLeft="@dimen/x741"-->
+        <!--android:layout_marginTop="@dimen/x134"-->
+        <!--android:text="00"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="@dimen/x63"-->
+        <!--android:textColor="#fff"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_width="@dimen/x110"-->
+        <!--android:layout_height="@dimen/x110"-->
+        <!--android:layout_marginLeft="@dimen/x880"-->
+        <!--android:layout_marginTop="@dimen/x134"-->
+        <!--android:text="00"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="@dimen/x63"-->
+        <!--android:textColor="#fff"-->
+        <!--/>-->
+
+
+</RelativeLayout>
+
 
 
             <com.zhoumai.qingtao.view.customview.Noscollgridview
@@ -110,50 +164,45 @@
                 style="@style/home_gridview" />
 
 
-
             <!--下面是轻淘推荐的商品  -->
-<!--todo 这里缺少轻淘推荐的布局 -->
+            <!--todo 这里缺少轻淘推荐的布局 -->
 
 
+            <!--下面是推荐的两个布局 -->
+            <RelativeLayout
+                android:id="@+id/tuijian1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:background="@mipmap/tuijian1">
+
+                <ImageView
+                    android:id="@+id/tuijian1_img"
+                    android:layout_width="@dimen/x500"
+                    android:layout_height="@dimen/x500"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x56"
+                    android:src="@mipmap/back1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/app_name" />
 
 
-<!--下面是推荐的两个布局 -->
-<RelativeLayout
-    android:id="@+id/tuijian1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/x20"
-    android:layout_marginRight="@dimen/x20"
-android:background="@mipmap/tuijian1"
-    >
-    <ImageView
-        android:layout_centerVertical="true"
-        android:id="@+id/tuijian1_img"
-        android:layout_marginLeft="@dimen/x56"
-        android:layout_width="@dimen/x500"
-        android:layout_height="@dimen/x500"
-        android:src="@mipmap/back1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
- android:layout_alignParentRight="true"
-    android:text="@string/app_name"
-    />
+                    android:layout_marginTop="@dimen/x28"
 
+                    android:text="@string/app_name"
+                    android:textColor="#e31430"
+                    android:textSize="@dimen/x56" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="@string/app_name"
-
-        android:layout_marginTop="@dimen/x28"
-        android:textColor="#e31430"
-        android:textSize="@dimen/x56"
-        />
-
-</RelativeLayout>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/tuijian2"
@@ -161,34 +210,32 @@ android:background="@mipmap/tuijian1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
                 android:layout_marginRight="@dimen/x20"
-                android:background="@mipmap/tuijian2"
-                >
+                android:background="@mipmap/tuijian2">
+
                 <ImageView
-                    android:layout_centerVertical="true"
                     android:id="@+id/tuijian1_img2"
-                    android:layout_marginLeft="@dimen/x56"
                     android:layout_width="@dimen/x500"
                     android:layout_height="@dimen/x500"
-                    android:src="@mipmap/back1"/>
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x56"
+                    android:src="@mipmap/back1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="@string/app_name"
-                    />
+                    android:text="@string/app_name" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="@string/app_name"
-
                     android:layout_marginTop="@dimen/x28"
+
+                    android:text="@string/app_name"
                     android:textColor="#e31430"
-                    android:textSize="@dimen/x56"
-                    />
+                    android:textSize="@dimen/x56" />
 
             </RelativeLayout>
 

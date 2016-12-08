@@ -140,6 +140,7 @@
     <style name="Theme.PageIndicatorDefault" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator1</item>
         <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator1</item>
+
     </style>
 
     <style name="Widget.IconPageIndicator1" parent="Widget">

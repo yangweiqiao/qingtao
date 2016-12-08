@@ -2,12 +2,14 @@ package com.zhoumai.qingtao.view.activity;
 
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -15,6 +17,9 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.zhoumai.qingtao.contains.Contains;
 import com.zhoumai.qingtao.utils.ActivityFinishUtils;
 import com.zhoumai.qingtao.utils.SpUtils;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 
 /**
@@ -45,14 +50,19 @@ public class BaseActivity extends ActionBarActivity {
         ActivityFinishUtils.addActivity(this);
 
 //设置通知栏的颜色
-         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-             setTranslucentStatus(true);
-             SystemBarTintManager tintManager = new SystemBarTintManager(this);
-             tintManager.setStatusBarTintEnabled(true);
-             //设置为透明
-             tintManager.setStatusBarTintResource(android.R.color.holo_red_light);//通知栏所需颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            //设置为透明
+            tintManager.setStatusBarTintResource(android.R.color.white);//通知栏所需颜色
         }
-// TODO: 2016/12/7  标题栏颜色   
+// TODO: 2016/12/7  标题栏文字颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+        setMiuiStatusBarDarkMode(this,true);
+
     }
 
     /**
@@ -73,6 +83,24 @@ public class BaseActivity extends ActionBarActivity {
         win.setAttributes(winParams);
     }
 
+
+    public static boolean setMiuiStatusBarDarkMode(Activity activity, boolean darkmode) {
+        Class<? extends Window> clazz = activity.getWindow().getClass();
+        try {
+            int darkModeFlag = 0;
+            Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
+            Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
+            darkModeFlag = field.getInt(layoutParams);
+            Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
+            extraFlagField.invoke(activity.getWindow(), darkmode ? darkModeFlag : 0, darkModeFlag);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     //这个方法 是判断用户是否登录 如果不需要每个界面都判断 只需要将该方法换个名字 然后在子类中访问就可以了就可以
     @Override
     protected void onStart() {
@@ -88,9 +116,6 @@ public class BaseActivity extends ActionBarActivity {
     }
 
 
-
-
-
     /**
      * 获取上下文
      *
@@ -100,15 +125,6 @@ public class BaseActivity extends ActionBarActivity {
     public Context getConText() {
         return this;
     }
-
-
-
-
-
-
-
-
-
 
 
     /**
