@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.CursorAdapter;
+import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -27,9 +29,11 @@ import com.zhoumai.qingtao.NET.NetUtils;
 import com.zhoumai.qingtao.R;
 import com.zhoumai.qingtao.ceshi;
 import com.zhoumai.qingtao.utils.DensityUtils;
+import com.zhoumai.qingtao.utils.Toastutils;
 import com.zhoumai.qingtao.view.TimerUtils.TimerUtils;
 import com.zhoumai.qingtao.view.adapter.BaseListViewViewHolder;
 import com.zhoumai.qingtao.view.adapter.CarouselViewpagerAdapter;
+import com.zhoumai.qingtao.view.adapter.GalleryAdapter;
 import com.zhoumai.qingtao.view.adapter.HomeGridViewAdapter;
 import com.zhoumai.qingtao.view.adapter.MySuperListViewAdapter;
 import com.zhoumai.qingtao.view.base.application.MyApp;
@@ -65,7 +69,7 @@ public class HomeHomeFragment extends BaseFragemnt {
 
 
     private int currentItem;
-    private InternalHandler mHandler=new InternalHandler();
+    private InternalHandler mHandler = new InternalHandler();
     private ArrayList<String> list;
     private LinearLayout homeTab2;
     private ImageView bigpoint;
@@ -116,7 +120,9 @@ public class HomeHomeFragment extends BaseFragemnt {
         homeViewpager = findView(R.id.home_home_viewpager);
 //1.设置viewpager页面之间的间距
         homeViewpager.setPageMargin((int) getResources().getDimensionPixelOffset(R.dimen.x20));//设置viewpager每个页卡的间距，与gallery的spacing属性类似
-        homeViewpager.setPageTransformer(true, new ScaleInOutTransformer());
+        //设置动画
+        // TODO: 2016/12/9 轮播图加动画会使点击事件失效 
+        //  homeViewpager.setPageTransformer(true, new ScaleInOutTransformer()); 
         /**2.轮播图的指示器**/
         homeTab2 = findView(R.id.home_tab2);
         /**3.轮播图的指示器上面滑动的那个大的点**/
@@ -124,7 +130,7 @@ public class HomeHomeFragment extends BaseFragemnt {
 
 
         /**
-         * 添加倒计时的父容器
+         * 添加倒计时的父容器 是和限量闪购的图片在一个相对布局中,这里找的是相对布局 方便我们添加显示时间的控件
          */
 
 
@@ -143,20 +149,17 @@ public class HomeHomeFragment extends BaseFragemnt {
  */
 
         //转换时间到毫秒值
-       // 2016-12-08 14:00:00
-String time ="2016-12-09 21:22:00";
+        // 2016-12-08 14:00:00
+        String time = "2016-12-09 21:22:00";
+        //截取时间中的数据部分
         String[] split = time.split("[^\\d]");
-
+//将截取的数字部分转换为字符串
         StringBuffer sb = new StringBuffer();
-        for(int i = 0; i < split.length; i++){
-            sb. append(split[i]);
+        for (int i = 0; i < split.length; i++) {
+            sb.append(split[i]);
         }
-
         String newStr = sb.toString();
-
-
-        System.out.println("时间1"+newStr);
-
+//按照规定的格式将字符串转换为毫秒值
         Calendar c = Calendar.getInstance();
 
         try {
@@ -166,38 +169,30 @@ String time ="2016-12-09 21:22:00";
         }
 
 
-
-
-        System.out.println("时间转化后的毫秒数为："+c.getTimeInMillis());
-
+        System.out.println("时间转化后的毫秒数为：" + c.getTimeInMillis());
 
 
         //获取系统当前的毫秒值
         long currentTimeMillis = System.currentTimeMillis();
-        System.out.println("时间转化后的毫秒数为问我："+currentTimeMillis);
-        //计算毫秒值差
+        System.out.println("时间转化后的毫秒数为问我：" + currentTimeMillis);
+        //计算获取的商品的毫秒值差
 
-        TextView tv= TimerUtils.getTimer(TimerUtils.JD_STYLE,getActivity(),c.getTimeInMillis()-currentTimeMillis, TimerUtils.TIME_STYLE_ONE,R.drawable.shape_timer)
-                .setTimerPadding(20,20,30,30)//设置内间距
+        TextView tv = TimerUtils.getTimer(TimerUtils.JD_STYLE, getActivity(), c.getTimeInMillis() - currentTimeMillis, TimerUtils.TIME_STYLE_ONE, R.drawable.shape_timer)
+                .setTimerPadding(20, 20, 30, 30)//设置内间距
                 .setTimerTextColor(Color.WHITE)//设置字体颜色
                 .setTimerTextSize(65)//设置字体大小
                 .setTimerGapColor(Color.RED)//设置间隔的颜色
                 .getmDateTv();//拿到TextView对象
-        parent.addView(tv);
+        parent.addView(tv);  //添加时间控件
 
         tv.setGravity(Gravity.CENTER);
+        //确定位置
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) tv.getLayoutParams();
-        params.setMargins(30,30,30,30);
-        params.leftMargin=610;
-        params.topMargin=235;
-
+        params.setMargins(30, 30, 30, 30);
+        params.leftMargin = 610;
+        params.topMargin = 235;
+//添加到相对布局中
         tv.setLayoutParams(params);
-
-
-
-
-
-
 
 
 //        根据网络的请求结果设置数据?
@@ -215,10 +210,10 @@ String time ="2016-12-09 21:22:00";
 
 
         //设置listview的数据
-        NetUtils.requestData("/mobi/product/catBrand", null, this,ceshi.class, true);
+        NetUtils.requestData("/mobi/product/catBrand", null, this, ceshi.class, true);
 
 // TODO: 2016/12/6 这里根据请求的数据显示内容  
-        stateLayout.showContentView();
+
 
 //        这个方法里面初始化数据 根据数据显示加载的界面
 //设置限量闪购的信息
@@ -232,7 +227,24 @@ String time ="2016-12-09 21:22:00";
 //设置品牌直购的信息
 //设置轻淘返现的信息
         //这一步的前提是list集合已经存在  可以添加到创建原点的方法中
-        homeViewpager.setAdapter(new CarouselViewpagerAdapter(list));
+
+        CarouselViewpagerAdapter viewpagerAdapter = new CarouselViewpagerAdapter(list);
+        homeViewpager.setAdapter(viewpagerAdapter);
+
+        viewpagerAdapter.setOnItemClickLitener(new CarouselViewpagerAdapter.OnItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toastutils.showToast("点击事件发生");
+
+                System.out.println("点击事件发生");
+            }
+        });
+
+
+        //设置当前显示的是中间的
+
+        homeViewpager.setCurrentItem(list.size() * 10000 * 5000 / 2);
+
     }
 
 
@@ -242,8 +254,6 @@ String time ="2016-12-09 21:22:00";
 
 
     }
-
-
 
 
     @Override
@@ -290,7 +300,7 @@ String time ="2016-12-09 21:22:00";
             return;
         }
         // 移除Handler对应消息队列中的回调和消息
-        mHandler.removeCallbacksAndMessages(null);
+        //  mHandler.removeCallbacksAndMessages(null);
 //        mHandler.postDelayed(new AutoSwitchPagerRunnable(), 5000);// 自动切换图片的子线程
 
         MobclickAgent.onPageStart("进入主界面中的首页"); //统计页面，"MainScreen"为页面名称，可自定义
@@ -300,10 +310,10 @@ String time ="2016-12-09 21:22:00";
     public void onStop() {
         super.onStop();
         if (mHandler == null) {
-           return;
+            return;
         }
         // 移除Handler对应消息队列中的回调和消息
-        mHandler.removeCallbacksAndMessages(null);
+        //mHandler.removeCallbacksAndMessages(null);
 
     }
 
@@ -341,11 +351,11 @@ String time ="2016-12-09 21:22:00";
  */
 
                 case 1:
-                  //  List<com.zhoumai.qingtao.ceshi.ResultBean> list1 = (List<ceshi.ResultBean>) msg.obj;
+                    //  List<com.zhoumai.qingtao.ceshi.ResultBean> list1 = (List<ceshi.ResultBean>) msg.obj;
 
                     ArrayList<String> list1 = new ArrayList<>();
 
-                    for(int i=0; i<9; i++){
+                    for (int i = 0; i < 9; i++) {
                         list1.add("suibiajk");
 
                     }
@@ -358,15 +368,15 @@ String time ="2016-12-09 21:22:00";
                     homeGridviewbk.setAdapter(new HomeGridViewAdapter(list1));
                     homeGridviewpp.setAdapter(new HomeGridViewAdapter(list1));
                     homeGridviewfx.setAdapter(new HomeGridViewAdapter(list1));
-
+                    stateLayout.showContentView();
 
             }
 
 
             // 切换图片.
-            int currentItem = (homeViewpager.getCurrentItem() + 1) % homeViewpager.getAdapter().getCount();
-            homeViewpager.setCurrentItem(currentItem);
-            postDelayed(new AutoSwitchPagerRunnable(), 8000);
+            //  int currentItem = (homeViewpager.getCurrentItem() + 1) % homeViewpager.getAdapter().getCount();
+            //   homeViewpager.setCurrentItem(currentItem);
+            //   postDelayed(new AutoSwitchPagerRunnable(), 8000);
 //接收到消息后，隔3秒后再次执行自动切换，这样就可以实现轮播
 
 
@@ -381,7 +391,7 @@ String time ="2016-12-09 21:22:00";
         @Override
         public void run() {
             // 得到一个消息发送给handler中的handleMessage方法.
-            mHandler.obtainMessage().sendToTarget();
+            //  mHandler.obtainMessage().sendToTarget();
         }
     }
 
@@ -419,17 +429,14 @@ String time ="2016-12-09 21:22:00";
         }
 
 
-
-
     }
 
     private void lunbotuListener() {
         /**
          * 设置viewpager的监听方法
          */
-        if (homeViewpager == null) {
-            return;
-        }
+
+
         homeViewpager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
             @Override
@@ -442,6 +449,7 @@ String time ="2016-12-09 21:22:00";
 
 
             }
+
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -468,6 +476,48 @@ String time ="2016-12-09 21:22:00";
 
 
         });
+
+
+//        homeViewpager.setOnTouchListener(new View.OnTouchListener() {
+//
+//            private int startX;
+//            private int startY;
+//
+//            @Override
+//            public boolean onTouch(View view, MotionEvent event) {
+//                int action = event.getAction();
+//                switch (action) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        startX = (int) event.getX();
+//                        startY = (int) event.getY();
+//
+//                        Toastutils.showToast("点击事件发生");
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        int endX = (int) event.getX();
+//                        int endY = (int) event.getY();
+//                        if (Math.abs(endX - startX) < 50 && Math.abs(endY - startY) < 50) {
+//                            try {
+//                                int itemIndex = homeViewpager.getCurrentItem();
+//
+//
+//                                list.get(itemIndex);
+//                                Toastutils.showToast("点击事件发生itemIndex" + itemIndex);
+//
+//
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
+
+
     }
 
 

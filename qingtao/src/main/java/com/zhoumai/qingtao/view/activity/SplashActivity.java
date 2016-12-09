@@ -40,6 +40,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
+import com.tencent.mm.sdk.openapi.*;
+
 /**
  * splash界面
  */
@@ -61,6 +63,15 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
     int versionCode;
     String versionName;
     String downLoadUrl;
+
+
+    /**
+     * 注册微信
+     */
+    private static final String APP_ID = "wx3ce7ac661982858e"; //微信申请的
+
+    public static IWXAPI api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,12 +79,27 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
 
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+
+        /**
+         * 向微信终端注册你的id
+         */
+        reqToWx();
+
         //初始化动画
         initAnimation();
         //初始化监听
         initListener();
 
         ActivityFinishUtils.addActivity(this);
+
+    }
+
+    /**
+     * 注册微信
+     */
+    private void reqToWx() {
+        api = WXAPIFactory.createWXAPI(this, APP_ID, true);
+        api.registerApp(APP_ID);
 
     }
 
@@ -117,7 +143,7 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
         System.out.println("是否联网" + connected);
         if (connected) {
 //查询新的版本
-         update();
+            update();
 
         } else {
 //直接进入主界面
@@ -152,16 +178,16 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
 
 
         UpdateInfo updateInfo = (UpdateInfo) json;
-        System.out.println("updateInfo"+updateInfo.toString());
+        System.out.println("updateInfo" + updateInfo.toString());
         //数据请求成功 判断有没有新的版本
 
-        if (updateInfo!=null&&updateInfo.getCode() == 0) {
+        if (updateInfo != null && updateInfo.getCode() == 0) {
             final Message msg = Message.obtain();
             int newVersionCode = updateInfo.getNewAppInfo().getVersionCode();
             if (newVersionCode != versionCode) {
 
                 //提示用户更新
-                  downLoadUrl = updateInfo.getNewAppInfo().getDownLoadUrl();
+                downLoadUrl = updateInfo.getNewAppInfo().getDownLoadUrl();
                 msg.what = SHOW_UPDATE_DIALOG;
                 handler.sendMessage(msg);
             } else {
@@ -181,8 +207,7 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
     private void showUpdateDialog() {
 
 
-        AlertDialog.Builder builder = new  AlertDialog.Builder( this);
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 
         builder.setTitle("发现新的版本");
@@ -275,7 +300,7 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
         map.put("versionCode", versionCode);
         map.put("type", 1);
 
-       NetUtils.requestData(Api.CHECK_UPDATE, map, this, UpdateInfo.class, false);
+        NetUtils.requestData(Api.CHECK_UPDATE, map, this, UpdateInfo.class, false);
     }
 
 
@@ -337,8 +362,6 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
     }
 
 
-
-
     protected void installApk(File file) {//参数 下载的apk文件
         // 使用隐式意图, 调用系统应用 Package Installer, 让它帮我们安装. (静默安装, ROOT)
         // <intent-filter>
@@ -354,14 +377,16 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
         intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
         startActivityForResult(intent, REQUEST_CODE_INSTALL);
     }
-        // 用户调用系统的安装方法 过程中取消安装的回调
-        @Override
-        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-            if(requestCode == REQUEST_CODE_INSTALL) {
-                enterActivity();
-            }
+
+    // 用户调用系统的安装方法 过程中取消安装的回调
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_INSTALL) {
+            enterActivity();
         }
+    }
+
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -383,7 +408,9 @@ public class SplashActivity extends BaseActivity implements Animation.AnimationL
                     enterActivity();
                     break;
             }
-        };
+        }
+
+        ;
     };
 
 }

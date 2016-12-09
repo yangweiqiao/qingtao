@@ -1,1 +1,1 @@
-include ':qingtao', ':pullToRefreshLibrary', ':myapplication'
+include ':qingtao', ':pullToRefreshLibrary', ':myapplication', ':goodslayout'

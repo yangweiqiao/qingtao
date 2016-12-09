@@ -148,4 +148,44 @@
         android:text="免费注册"
         android:textColor="@color/colorSelectedIcon"
         android:textSize="18sp" />
+
+
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/weixin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="微信"
+            />
+
+        <TextView
+            android:id="@+id/weibo"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="微博"
+            />
+
+        <TextView
+            android:id="@+id/qq"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="qq"
+            />
+
+    </LinearLayout>
+
+
+
 </LinearLayout>

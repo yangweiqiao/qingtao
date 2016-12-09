@@ -62,8 +62,8 @@ public class MeFragment extends BaseFragemnt implements View.OnClickListener {
             R.mipmap.wd_qb_icon, R.mipmap.wd_sj_icon, R.mipmap.wd_vip_icon,
     };
     private String[] iconName = {
-            "我的收藏", "购物车", "优惠券",
-            "我的钱包", "我是商家", "我是会员"
+            "收藏关注", "购物车", "我的钱包",
+            "我要升级", "轻淘店", "星管家"
     };
     private int[] icon2 = {
             R.mipmap.wd_xlsg_icon, R.mipmap.wd_bkpt_icon, R.mipmap.wd_ppzg_icon,
@@ -102,7 +102,7 @@ public class MeFragment extends BaseFragemnt implements View.OnClickListener {
 
 
         //设置布局管理器
-        FullyGridLayoutManager linearLayoutManager = new FullyGridLayoutManager(getContext(),1);
+        FullyGridLayoutManager linearLayoutManager = new FullyGridLayoutManager(getContext(), 1);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         Browserecords.setLayoutManager(linearLayoutManager);
@@ -193,7 +193,7 @@ public class MeFragment extends BaseFragemnt implements View.OnClickListener {
         //设置适配器
         GalleryAdapter mAdapter = new GalleryAdapter(getContext(), strings);
 
-      //  Browserecords.addItemDecoration(new SpaceItemDecoration(5,mAdapter));
+        //  Browserecords.addItemDecoration(new SpaceItemDecoration(5,mAdapter));
 
         Browserecords.setAdapter(mAdapter);
 
@@ -204,8 +204,6 @@ public class MeFragment extends BaseFragemnt implements View.OnClickListener {
             }
         });
     }
-
-
 
 
     @Override

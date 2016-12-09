@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhoumai.qingtao">
 
+
+    <!--添加微信需要得到的权限  因为是重复的权限 不添加了 -->
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+
+
     <!-- 配置友盟的 开始 -->
     <uses-sdk android:minSdkVersion="4"></uses-sdk>
 
@@ -10,7 +19,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 配置友盟的 结束 -->
-
     <!--权限-->
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -52,8 +60,11 @@
             />
 
 
-        <!--登录界面 -->
-        <activity android:name=".view.activity.LoginActivity" />
+        <!--登录界面 配置启动模式-->
+        <activity
+            android:name=".view.activity.LoginActivity"
+
+            android:launchMode="singleTask" />
 
         <!--设置的界面-->
 
@@ -77,15 +88,6 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" /> <!-- 多渠道打包  占位符配置 需要gradle配置集合 替换 UMENG_CHANNEL_VALUE-->
 
-
-        <!--自动适配-->
-        <meta-data
-            android:name="design_width"
-            android:value="1080" />
-        /
-        <meta-data
-            android:name="design_height"
-            android:value="1280" />
 
 
     </application>

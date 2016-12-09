@@ -8,26 +8,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tencent.mm.sdk.modelmsg.SendAuth;
 import com.umeng.analytics.MobclickAgent;
-import com.zhoumai.qingtao.NET.Api;
-import com.zhoumai.qingtao.NET.JsonUtil;
-import com.zhoumai.qingtao.NET.NetUtils;
-import com.zhoumai.qingtao.NET.onRequestDataFinish;
 import com.zhoumai.qingtao.R;
-import com.zhoumai.qingtao.contains.Contains;
-import com.zhoumai.qingtao.model.Admin;
 import com.zhoumai.qingtao.utils.ActivityFinishUtils;
-import com.zhoumai.qingtao.utils.SpUtils;
 import com.zhoumai.qingtao.utils.Toastutils;
-import com.zhoumai.qingtao.view.base.application.MyApp;
 
 import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.umeng.analytics.MobclickAgent.onProfileSignIn;
 
 
 /**
@@ -49,6 +40,12 @@ public class LoginActivity extends BaseActivity {
     TextView privateActLoginTvForget;
     @BindView(R.id.act_login_tv_reg)
     TextView privateActLoginTvReg;
+    @BindView(R.id.weixin)
+    TextView privateWeixin;
+    @BindView(R.id.weibo)
+    TextView privateWeibo;
+    @BindView(R.id.qq)
+    TextView privateQq;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,7 +59,7 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.frag_login_iv_back, R.id.frag_login_tv_help, R.id.act_login_tv_login, R.id.act_login_tv_forget, R.id.act_login_tv_reg})
+    @OnClick({R.id.frag_login_iv_back, R.id.frag_login_tv_help, R.id.act_login_tv_login, R.id.act_login_tv_forget, R.id.act_login_tv_reg,R.id.weixin, R.id.weibo, R.id.qq})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.frag_login_iv_back://左上角的返回键
@@ -81,6 +78,19 @@ public class LoginActivity extends BaseActivity {
                 //跳转注册界面
                 startActivity(new Intent(this, MainActivity.class));
                 break;
+
+
+            case R.id.weixin:
+
+                Toastutils.showToast("点击登录");
+                // send oauth request
+                final SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "wechat_sdk_demo_test";
+               SplashActivity.api.sendReq(req);
+
+                break;
+
         }
     }
 
@@ -146,12 +156,15 @@ public class LoginActivity extends BaseActivity {
 
 
     }
+
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
     }
+
 }
